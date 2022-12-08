@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AirQuality">
+
+    <Button
+        android:id="@+id/recommended_places_to_live"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="200dp"
+        android:text="London Air Quality Explorer"
+        android:backgroundTint="#FF5722"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/live_london_pollution_levels"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="300dp"
+        android:text="Live Pollution levels"
+        android:textColor="@android:color/background_light"
+        android:backgroundTint="#FF9800"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</RelativeLayout>

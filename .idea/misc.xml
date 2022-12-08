@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_air_quality.xml" value="0.45677083333333335" />
+        <entry key="app/src/main/res/layout/activity_air_quality_plot.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_emergency.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_inhaler_menu.xml" value="0.4474932635271991" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34878234863281266" />
+        <entry key="app/src/main/res/layout/activity_overdose_popup.xml" value="0.35" />
+        <entry key="app/src/main/res/layout/activity_prescription_details.xml" value="0.32271575927734375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
