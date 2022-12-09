@@ -6,7 +6,6 @@
     tools:context=".MainMenu"
     tools:layout_editor_absoluteY="81dp">
 
-    <!-- add button after click this we can goto another activity-->
     <TextView
         android:id="@+id/question1_id"
         android:layout_width="wrap_content"
