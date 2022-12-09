@@ -3,6 +3,7 @@ package com.example.PRG3AirPollutionMonitor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,117 +11,161 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
+
 
 public class LiveAirPollution extends AppCompatActivity {
 
     TextView location_live_viewer;
-
     TextView air_pollution_rating_viewer;
+    String x;
+    String api_output;
+    String url;
+    String url2;
+    String formatted_url;
+    JSONObject json_url;
 
     String[] items = {
-            "Barking & Dagenham",
+            "Barking and Dagenham",
+            "Barnet",
             "Bexley",
             "Brent",
-            "Brentwood",
             "Bromley",
             "Camden",
-            "Castle Point",
             "City of London",
             "Croydon",
-            "Dartford",
             "Ealing",
             "Enfield",
             "Greenwich",
             "Hackney",
+            "Hammershith and Fulham",
             "Haringey",
             "Harrow",
             "Havering",
+            "Hillingdon",
+            "Hounslow",
             "Islington",
+            "Kensington and Chelsea",
             "Kingston",
             "Lambeth",
             "Lewisham",
             "Merton",
             "Newham",
             "Redbridge",
-            "Reigate & Banstead",
             "Richmond",
-            "Sevenoaks",
             "Southwark",
             "Sutton",
-            "Thurrock",
             "Tower Hamlets",
+            "Waltham Forest",
             "Wansdsorth",
-            "Westminster",
-            "Windsor & Maidenhead",
-    };
-
-    Integer[] PolutionLevels = {
-            1,
-            2,
-            2,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
+            "Westminster"
     };
 
     AutoCompleteTextView autoCompleteTxt;
-
     ArrayAdapter<String> adapterItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_air_pollution);
+        RequestQueue queue = Volley.newRequestQueue(LiveAirPollution.this);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         location_live_viewer = findViewById(R.id.location_live_viewer_text);
         location_live_viewer.setText("Select a Borough");
         air_pollution_rating_viewer = findViewById(R.id.air_pollution_rating_viewer_text);
-        air_pollution_rating_viewer.setText("Polution Level:");
 
         autoCompleteTxt = findViewById(R.id.auto_complete_txt);
-
         adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items);
-
         autoCompleteTxt.setAdapter(adapterItems);
-
         autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 Toast.makeText(getApplicationContext(),"Item: " +item,Toast.LENGTH_SHORT).show();
-                air_pollution_rating_viewer.setText("Polution Level in " + item + " : " + PolutionLevels[Arrays.asList(items).indexOf(item)]);
+
+                x = items[Arrays.asList(items).indexOf(item)].toLowerCase().replaceAll("\\s+","");
+
+                //generateJson("http://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName="+x+"/Json");
+
+//                url = "http://api.erg.ic.ac.uk/AirQuality/Hourly/Map/Json";
+//                url2 = url;
+//                System.out.println(url2);
+//
+//                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        System.out.println("RESPONSE HERE?");
+//                        System.out.println(response);
+//                        System.out.println("RESPONSE HERE?");
+//                        air_pollution_rating_viewer.setText(response.toString());
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        air_pollution_rating_viewer.setText("THERE IS AN ERROR");
+//
+//
+//                    }
+//                });
+//
+//                queue.add(jsonObjectRequest);
+
+                class fetchData extends Thread {
+
+                    String data = "";
+
+                    @Override
+                    public void run() {
+                        try {
+                            URL new_url = new URL("https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName="+x+"/Json");
+                            HttpURLConnection httpURLConnection = (HttpURLConnection) new_url.openConnection();
+                            InputStream inputStream = httpURLConnection.getInputStream();
+                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                            String line;
+
+                            while ((line = bufferedReader.readLine()) != null) {
+                                System.out.println(line);
+                                data = data + line;
+                            }
+
+                            air_pollution_rating_viewer.setText(data);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                new fetchData().run();
             }
         });
 
     }
+
+
+
+
+
 }
+
