@@ -1,8 +1,10 @@
 package com.example.PRG3AirPollutionMonitor;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +12,7 @@ public class InhalerMenu extends AppCompatActivity {
 
     Button check_calendar_button;
     Button check_prescription_details_button;
+    TextView inhaler_menu_text_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,14 @@ public class InhalerMenu extends AppCompatActivity {
 
         check_calendar_button = (Button) findViewById(R.id.check_calendar);
         check_prescription_details_button = (Button) findViewById(R.id.check_prescription_details);
+        inhaler_menu_text_view = (TextView) findViewById(R.id.inhaler_menu_text);
+
+        // In question1 get the TextView use by findViewById()
+        // In TextView set question Answer for message
+
+        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+        inhaler_menu_text_view.setTypeface(customFont);
+        inhaler_menu_text_view.setText("Inhaler Use\n");
 
 
         check_calendar_button.setOnClickListener(v -> {

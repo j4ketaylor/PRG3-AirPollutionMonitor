@@ -15,6 +15,7 @@ public class PrescriptionDetails extends AppCompatActivity {
     private TextView remaining_inhaler_uses_display;
     private TextView prescription_expiry_date_text;
     private TextView prescription_expiry_date_display;
+    private TextView new_information_text;
     private EditText new_prescription_number_of_uses;
     private EditText new_prescription_expiry_date;
 
@@ -42,11 +43,13 @@ public class PrescriptionDetails extends AppCompatActivity {
         prescription_expiry_date_display = (TextView) findViewById(R.id.prescription_expiration_date_display_text);
         new_prescription_number_of_uses = (EditText) findViewById(R.id.new_prescription_number_of_uses_input);
         new_prescription_expiry_date = (EditText) findViewById(R.id.new_prescription_expiry_date_input);
+        new_information_text = (TextView) findViewById(R.id.new_information);
         apply_text_button = (Button) findViewById(R.id.apply_text_button);
         save_button = (Button) findViewById(R.id.save_text_button);
 
         prescription_expiry_date_display.setText("Expiry Date: \n");
         remaining_inhaler_uses_display.setText("Number of uses: \n");
+        new_information_text.setText("Enter new information:\n");
 
         apply_text_button.setOnClickListener(new View.OnClickListener() {
             @Override

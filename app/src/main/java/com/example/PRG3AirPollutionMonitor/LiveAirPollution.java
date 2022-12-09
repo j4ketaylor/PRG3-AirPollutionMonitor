@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -74,7 +75,7 @@ public class LiveAirPollution extends AppCompatActivity {
             "Sutton",
             "Tower Hamlets",
             "Waltham Forest",
-            "Wansdsorth",
+            "Wandsworth",
             "Westminster"
     };
 
@@ -104,32 +105,6 @@ public class LiveAirPollution extends AppCompatActivity {
 
                 x = items[Arrays.asList(items).indexOf(item)].toLowerCase().replaceAll("\\s+","");
 
-                //generateJson("http://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName="+x+"/Json");
-
-//                url = "http://api.erg.ic.ac.uk/AirQuality/Hourly/Map/Json";
-//                url2 = url;
-//                System.out.println(url2);
-//
-//                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
-//
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        System.out.println("RESPONSE HERE?");
-//                        System.out.println(response);
-//                        System.out.println("RESPONSE HERE?");
-//                        air_pollution_rating_viewer.setText(response.toString());
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        air_pollution_rating_viewer.setText("THERE IS AN ERROR");
-//
-//
-//                    }
-//                });
-//
-//                queue.add(jsonObjectRequest);
-
                 class fetchData extends Thread {
 
                     String data = "";
@@ -149,6 +124,7 @@ public class LiveAirPollution extends AppCompatActivity {
                             }
 
                             air_pollution_rating_viewer.setText(data);
+
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (IOException e) {

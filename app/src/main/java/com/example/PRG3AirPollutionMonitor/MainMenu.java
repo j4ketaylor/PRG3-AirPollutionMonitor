@@ -2,6 +2,7 @@ package com.example.PRG3AirPollutionMonitor;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.widget.Button;
@@ -54,6 +55,9 @@ public class MainMenu extends AppCompatActivity {
 
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
+
+        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+        question1.setTypeface(customFont);
         question1.setText("Welcome\n");
 
         // Add_button add clicklistener

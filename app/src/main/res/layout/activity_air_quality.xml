@@ -5,16 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".AirQuality">
 
-    <Button
-        android:id="@+id/recommended_places_to_live"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
+    <TextView
+        android:id="@+id/air_quality_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="200dp"
-        android:text="London Air Quality Explorer"
-        android:backgroundTint="#FF5722"
-        android:textSize="15sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text=""
+        android:textSize="40dp"
         android:textStyle="bold" />
 
     <Button
@@ -23,10 +22,23 @@
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#68BBE3"
         android:text="Live Pollution levels"
         android:textColor="@android:color/background_light"
-        android:backgroundTint="#FF9800"
         android:textSize="15sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/recommended_places_to_live"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="300dp"
+        android:backgroundTint="#0E86D4"
+        android:text="Air Quality History"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

@@ -6,6 +6,17 @@
     tools:context=".InhalerMenu"
     tools:layout_editor_absoluteY="81dp">
 
+    <TextView
+        android:id="@+id/inhaler_menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text=""
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/check_calendar"
         android:layout_width="250dp"
@@ -16,7 +27,7 @@
         android:text="Check Calendar"
         android:textColor="@android:color/background_light"
         android:textSize="15sp"
-        android:backgroundTint="#FF5722"
+        android:backgroundTint="#68BBE3"
         android:textStyle="bold" />
 
     <Button
@@ -28,7 +39,7 @@
         android:layout_marginLeft="150dp"
         android:text="Check Prescription Details"
         android:textColor="@android:color/background_light"
-        android:backgroundTint="#FF9800"
+        android:backgroundTint="#0E86D4"
         android:textSize="15sp"
         android:textStyle="bold" />
 
