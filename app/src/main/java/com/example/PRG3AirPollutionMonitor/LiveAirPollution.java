@@ -123,11 +123,42 @@ public class LiveAirPollution extends AppCompatActivity {
                                 data = data + line;
                             }
 
-                            air_pollution_rating_viewer.setText(data);
+                            JSONObject myObject = new JSONObject(data);
+                            JSONObject groupName = myObject.getJSONObject("DailyAirQualityIndex").getJSONObject("LocalAuthority");
+                            String information_string = "";
+
+                            JSONArray arr = groupName.getJSONArray("Site");
+                            for (int i = 0; i < arr.length(); i++)
+                            {
+                                JSONObject sites = arr.getJSONObject(i);
+                                try {
+                                    JSONObject species = sites.getJSONObject("Species");
+                                    System.out.println("Species i+ " + i + " " + species);
+                                    information_string = information_string + species + "\n";
+                                } catch (Exception e){
+                                    JSONArray species_array = sites.getJSONArray("Species");
+                                    for (int j = 0; i <= species_array.length(); j++) {
+                                        try {
+                                            JSONObject species = species_array.getJSONObject(j);
+                                            System.out.println("Species j+ " + j + " " + species);
+                                            information_string = information_string + species + "\n";
+                                        } catch (Exception f) {
+                                            break;
+                                        }
+
+                                    }
+                                }
+
+                            }
+                            System.out.println("\n" + information_string);
+
+                            air_pollution_rating_viewer.setText(information_string);
 
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
