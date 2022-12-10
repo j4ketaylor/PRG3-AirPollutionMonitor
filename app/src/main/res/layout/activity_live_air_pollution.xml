@@ -38,7 +38,7 @@
         android:id="@+id/air_pollution_rating_viewer_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="150dp"
         android:textSize="15dp"
         android:text="" />
