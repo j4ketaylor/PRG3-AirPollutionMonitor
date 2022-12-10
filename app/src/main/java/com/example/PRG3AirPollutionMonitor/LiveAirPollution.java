@@ -30,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Hashtable;
 
 
 public class LiveAirPollution extends AppCompatActivity {
@@ -91,7 +92,7 @@ public class LiveAirPollution extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         location_live_viewer = findViewById(R.id.location_live_viewer_text);
-        location_live_viewer.setText("Select a Borough");
+        location_live_viewer.setText("Select a location:");
         air_pollution_rating_viewer = findViewById(R.id.air_pollution_rating_viewer_text);
 
         autoCompleteTxt = findViewById(R.id.auto_complete_txt);
@@ -112,6 +113,26 @@ public class LiveAirPollution extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+
+                            Hashtable<String, Double> my_dict = new Hashtable<String, Double>();
+
+                            my_dict.put("Carbon Monoxide", 0.0);
+                            my_dict.put("Nitrogen Dioxide", 0.0);
+                            my_dict.put("Ozone", 0.0);
+                            my_dict.put("PM10 Particulate", 0.0);
+                            my_dict.put("PM2.5 Particulate", 0.0);
+                            my_dict.put("Sulphur Dioxide", 0.0);
+
+                            Hashtable<String, Integer> my_dict_no_of_entries = new Hashtable<String, Integer>();
+
+                            my_dict_no_of_entries.put("Carbon Monoxide", 0);
+                            my_dict_no_of_entries.put("Nitrogen Dioxide", 0);
+                            my_dict_no_of_entries.put("Ozone", 0);
+                            my_dict_no_of_entries.put("PM10 Particulate", 0);
+                            my_dict_no_of_entries.put("PM2.5 Particulate", 0);
+                            my_dict_no_of_entries.put("Sulphur Dioxide", 0);
+
+
                             URL new_url = new URL("https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName="+x+"/Json");
                             HttpURLConnection httpURLConnection = (HttpURLConnection) new_url.openConnection();
                             InputStream inputStream = httpURLConnection.getInputStream();
@@ -133,15 +154,22 @@ public class LiveAirPollution extends AppCompatActivity {
                                 JSONObject sites = arr.getJSONObject(i);
                                 try {
                                     JSONObject species = sites.getJSONObject("Species");
-                                    System.out.println("Species i+ " + i + " " + species);
-                                    information_string = information_string + species + "\n";
+                                    my_dict.put(species.get("@SpeciesDescription").toString(),
+                                            Double.parseDouble(species.get("@AirQualityIndex").toString()) +
+                                                    (my_dict.get(species.get("@SpeciesDescription").toString())));
+
+                                    my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
+
                                 } catch (Exception e){
                                     JSONArray species_array = sites.getJSONArray("Species");
                                     for (int j = 0; i <= species_array.length(); j++) {
                                         try {
                                             JSONObject species = species_array.getJSONObject(j);
-                                            System.out.println("Species j+ " + j + " " + species);
-                                            information_string = information_string + species + "\n";
+                                            my_dict.put(species.get("@SpeciesDescription").toString(),
+                                                    Double.parseDouble(species.get("@AirQualityIndex").toString()) +
+                                                            (my_dict.get(species.get("@SpeciesDescription").toString())));
+
+                                            my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
                                         } catch (Exception f) {
                                             break;
                                         }
@@ -150,9 +178,34 @@ public class LiveAirPollution extends AppCompatActivity {
                                 }
 
                             }
-                            System.out.println("\n" + information_string);
 
-                            air_pollution_rating_viewer.setText(information_string);
+                            if (my_dict_no_of_entries.get("Carbon Monoxide") == 0) {
+                                my_dict_no_of_entries.put("Carbon Monoxide", 1);
+                            }
+                            if (my_dict_no_of_entries.get("Nitrogen Dioxide") == 0) {
+                                my_dict_no_of_entries.put("Nitrogen Dioxide", 1);
+                            }
+                            if (my_dict_no_of_entries.get("Ozone") == 0) {
+                                my_dict_no_of_entries.put("Ozone", 1);
+                            }
+                            if (my_dict_no_of_entries.get("PM10 Particulate") == 0) {
+                                my_dict_no_of_entries.put("PM10 Particulate", 1);
+                            }
+                            if (my_dict_no_of_entries.get("PM2.5 Particulate") == 0) {
+                                my_dict_no_of_entries.put("PM2.5 Particulate", 1);
+                            }
+                            if (my_dict_no_of_entries.get("Sulphur Dioxide") == 0) {
+                                my_dict_no_of_entries.put("Sulphur Dioxide", 1);
+                            }
+
+                            air_pollution_rating_viewer.setText(
+                                    "Carbon Monoxide:   " + Math.round((float)(my_dict.get("Carbon Monoxide")/my_dict_no_of_entries.get("Carbon Monoxide"))) + "\n" +
+                                    "Nitrogen Dioxide:  " + Math.round((float)(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))) + "\n" +
+                                    "Ozone:             " + Math.round((float)(my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))) + "\n" +
+                                    "PM10 Particulate:  " + Math.round((float)(my_dict.get("PM10 Particulate")/my_dict_no_of_entries.get("PM10 Particulate"))) + "\n" +
+                                    "PM2.5 Particulate: " + Math.round((float)(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))) + "\n"+
+                                    "Sulphur Dioxide:   " + Math.round((float)(my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide")))+  "\n"
+                            );
 
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
