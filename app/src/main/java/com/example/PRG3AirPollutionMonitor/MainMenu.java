@@ -46,7 +46,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (timer_running){
-                    startActivity(new Intent(MainMenu.this,overdose_popup.class));
+                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
                 }
                 else{
                     startTimer();

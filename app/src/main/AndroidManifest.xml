@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Letstryagain"
         tools:targetApi="31">
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.overdose_popup"
+            android:name="com.example.PRG3AirPollutionMonitor.OverdosePopup"
             android:theme="@style/overdose_popup"
             android:exported="false" />
         <activity
