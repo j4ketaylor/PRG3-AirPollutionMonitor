@@ -176,7 +176,6 @@ public class LiveAirPollution extends AppCompatActivity {
 
                                     }
                                 }
-
                             }
 
                             if (my_dict_no_of_entries.get("Carbon Monoxide") == 0) {
@@ -204,8 +203,11 @@ public class LiveAirPollution extends AppCompatActivity {
                                     "Ozone:             " + Math.round((float)(my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))) + "\n" +
                                     "PM10 Particulate:  " + Math.round((float)(my_dict.get("PM10 Particulate")/my_dict_no_of_entries.get("PM10 Particulate"))) + "\n" +
                                     "PM2.5 Particulate: " + Math.round((float)(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))) + "\n"+
-                                    "Sulphur Dioxide:   " + Math.round((float)(my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide")))+  "\n"
-                            );
+                                    "Sulphur Dioxide:   " + Math.round((float)(my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide")))+  "\n\n" +
+                                    "Asthma Index:      " + 0.25*((my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))
+                                                          + 2*(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))
+                                                          + (my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide"))
+                                                          + 2*(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))));
 
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
@@ -222,10 +224,5 @@ public class LiveAirPollution extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
 }
 
