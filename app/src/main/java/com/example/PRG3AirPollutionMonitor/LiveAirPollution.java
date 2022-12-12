@@ -197,17 +197,31 @@ public class LiveAirPollution extends AppCompatActivity {
                                 my_dict_no_of_entries.put("Sulphur Dioxide", 1);
                             }
 
+                            double asthma_index = 0.25*((my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))
+                                    + 2*(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))
+                                    + (my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide"))
+                                    + 2*(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate")));
+
+                            String asthma_index_color;
+                            if (asthma_index <= 1) {
+                                asthma_index_color = "\uD83D\uDFE2";
+                            } else if (asthma_index <= 2) {
+                                asthma_index_color = "\uD83D\uDFE0";
+                            } else {
+                                asthma_index_color = "\uD83D\uDD34";
+                            }
+
+
+
+
                             air_pollution_rating_viewer.setText(
                                     "Carbon Monoxide:   " + Math.round((float)(my_dict.get("Carbon Monoxide")/my_dict_no_of_entries.get("Carbon Monoxide"))) + "\n" +
-                                    "Nitrogen Dioxide:  " + Math.round((float)(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))) + "\n" +
-                                    "Ozone:             " + Math.round((float)(my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))) + "\n" +
-                                    "PM10 Particulate:  " + Math.round((float)(my_dict.get("PM10 Particulate")/my_dict_no_of_entries.get("PM10 Particulate"))) + "\n" +
-                                    "PM2.5 Particulate: " + Math.round((float)(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))) + "\n"+
-                                    "Sulphur Dioxide:   " + Math.round((float)(my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide")))+  "\n\n" +
-                                    "Asthma Index:      " + 0.25*((my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))
-                                                          + 2*(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))
-                                                          + (my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide"))
-                                                          + 2*(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))));
+                                            "Nitrogen Dioxide:     " + Math.round((float)(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))) + "\n" +
+                                            "Ozone:                        " + Math.round((float)(my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))) + "\n" +
+                                            "PM10 Particulate:    " + Math.round((float)(my_dict.get("PM10 Particulate")/my_dict_no_of_entries.get("PM10 Particulate"))) + "\n" +
+                                            "PM2.5 Particulate:   " + Math.round((float)(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate"))) + "\n"+
+                                            "Sulphur Dioxide:       " + Math.round((float)(my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide")))+  "\n\n" +
+                                            "Asthma Index:          " + asthma_index + " " + asthma_index_color);
 
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
