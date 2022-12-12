@@ -9,7 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 import java.util.Locale;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 
 public class MainMenu extends AppCompatActivity {
@@ -86,6 +94,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
+
     }
 
     private void startTimer(){
@@ -140,4 +149,6 @@ public class MainMenu extends AppCompatActivity {
             }
         }
     }
+
+
 }
