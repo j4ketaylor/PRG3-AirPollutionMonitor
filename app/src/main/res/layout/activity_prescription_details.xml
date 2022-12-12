@@ -6,7 +6,6 @@
     tools:context=".PrescriptionDetails"
     tools:layout_editor_absoluteY="81dp">
 
-
     <TextView
         android:id="@+id/remaining_inhaler_uses"
         android:layout_width="wrap_content"
@@ -101,7 +100,6 @@
         android:layout_centerHorizontal="true"
         android:text="Save"
         android:textColor="@android:color/background_light" />
-
 
 </RelativeLayout>
 
