@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="842dp"
+        android:layout_width="wrap_content"
+        android:layout_height="852dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -16,16 +16,16 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="0dp"
         android:autoSizeTextType="none"
         android:autoText="false"
+        android:background="@drawable/overdose_popup_border"
         android:clickable="false"
         android:text="Please wait before having another dose"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
-        android:background="@drawable/overdose_popup_border"/>
+        android:textSize="30dp" />
 
 
 </RelativeLayout>
