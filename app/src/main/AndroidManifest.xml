@@ -23,6 +23,12 @@
             android:name="com.example.PRG3AirPollutionMonitor.UsageCalendar"
             android:exported="false" />
         <activity
+            android:name="com.example.PRG3AirPollutionMonitor.CALWeekView"
+            android:exported="false" />
+        <activity
+            android:name="com.example.PRG3AirPollutionMonitor.CALEditEvent"
+            android:exported="false" />
+        <activity
             android:name="com.example.PRG3AirPollutionMonitor.LiveAirPollution"
             android:exported="false" />
         <activity

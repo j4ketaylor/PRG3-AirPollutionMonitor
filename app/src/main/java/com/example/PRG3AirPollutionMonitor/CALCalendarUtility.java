@@ -53,6 +53,7 @@ public class CALCalendarUtility {
     {
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate currentDate = sundayOfWeek(selectedDate);
+        assert currentDate != null;
         LocalDate endDate = currentDate.plusWeeks(1);
 
         while (currentDate.isBefore(endDate))

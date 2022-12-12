@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.OnItemClickListener
+public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.calOnItemClickListener
 {
     private TextView monthYearText;
     private RecyclerView calendarRecView;
@@ -62,7 +62,7 @@ public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.O
     }
 
     @Override
-    public void onItemClick(int position, LocalDate date)
+    public void calOnItemClick(int position, LocalDate date)
     {
         CALCalendarUtility.selectedDate = date;
         setWeekView();

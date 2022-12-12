@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class CALCalendarAdapt extends RecyclerView.Adapter<CALCalendarView>
 {
     private final ArrayList<LocalDate> days;
-    private final OnItemClickListener listener;
+    private final calOnItemClickListener listener;
 
-    public CALCalendarAdapt(ArrayList<LocalDate> days, OnItemClickListener listener)
+    public CALCalendarAdapt(ArrayList<LocalDate> days, calOnItemClickListener listener)
     {
         this.days = days;
         this.listener = listener;
@@ -59,8 +59,8 @@ public class CALCalendarAdapt extends RecyclerView.Adapter<CALCalendarView>
         return days.size();
     }
 
-    public interface OnItemClickListener
+    public interface calOnItemClickListener
     {
-        void onItemClick(int position, LocalDate date);
+        void calOnItemClick(int position, LocalDate date);
     }
 }
