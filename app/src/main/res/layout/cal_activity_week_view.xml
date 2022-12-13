@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UsageCalendar">
+    tools:context=".CALWeekView">
 
     <TextView
         android:id="@+id/usage_calendar_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Monthly Calendar"
+        android:text="Weekly Calendar"
         android:textSize="30sp"
         android:background="#68BBE3"
         android:textColor="@android:color/background_light"
@@ -28,15 +28,15 @@
 
         <Button
             android:layout_width="0dp"
-            android:layout_marginStart="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="previousMonth"
+            android:layout_marginStart="20dp"
+            android:onClick="previousWeek"
             android:text="◀"
             android:backgroundTint="#68BBE3"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/monthYearText"
@@ -47,26 +47,22 @@
             android:textAlignment="center"
             android:textColor="#003060"
             android:textSize="22sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="nextMonth"
+            android:onClick="nextWeek"
             android:text="▶"
-            android:layout_marginEnd="20dp"
             android:backgroundTint="#68BBE3"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
-
+            android:textStyle="bold" />
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,23 +136,25 @@
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-        />
+        android:layout_weight="1"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="200dp"
         android:background="@null"
+        android:onClick="newCALEvent"
+        android:text="Manual Record"
         android:backgroundTint="#68BBE3"
-        android:onClick="goToWeekView"
-        android:text="Weekly View"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
-        android:textStyle="bold" />
-
-
-
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        />
+    
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
 
 </LinearLayout>
