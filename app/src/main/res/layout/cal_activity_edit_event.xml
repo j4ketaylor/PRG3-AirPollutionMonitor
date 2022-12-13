@@ -9,23 +9,38 @@
     tools:context=".CALEditEvent">
 
     <TextView
+        android:id="@+id/usage_calendar_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="Manual Record"
+        android:textSize="30sp"
+        android:background="#68BBE3"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Name"
-        android:textSize="20sp"
+        android:layout_marginTop="60dp"
+        android:text="Inhaler Use"
+        android:textSize="25sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="#003060"
+        android:textStyle="bold"/>
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/eventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="20sp"
         android:ems="10"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:hint="Enter Detail"/>
+        />
 
     <TextView
         android:id="@+id/eventDate"
@@ -34,30 +49,33 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="Date"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="#003060"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/eventTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="Time"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="#003060"
+        android:textStyle="bold"/>
 
     <Button
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        android:layout_height="60dp"
         android:onClick="saveEvent"
-        android:text="Save"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:layout_gravity="center" />
+        android:text="Record Use"
+        android:backgroundTint="#68BBE3"
+        android:textColor="@android:color/background_light"
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
 
 </LinearLayout>

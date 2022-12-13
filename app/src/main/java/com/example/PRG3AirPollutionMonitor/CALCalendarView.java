@@ -14,8 +14,8 @@ public class CALCalendarView extends RecyclerView.ViewHolder  implements View.On
     private final ArrayList<LocalDate> days;
     public final View parentView;
     public final TextView dayOfMonth;
-    private final CALCalendarAdapt.calOnItemClickListener listener;
-    public CALCalendarView(@NonNull View itemView, CALCalendarAdapt.calOnItemClickListener listener, ArrayList<LocalDate> days)
+    private final CALCalendarAdapt.onItemClickListener listener;
+    public CALCalendarView(@NonNull View itemView, CALCalendarAdapt.onItemClickListener listener, ArrayList<LocalDate> days)
     {
         super(itemView);
         parentView = itemView.findViewById(R.id.parentView);
@@ -26,12 +26,7 @@ public class CALCalendarView extends RecyclerView.ViewHolder  implements View.On
     }
 
     @Override
-    public void onClick(View v)
-    {
-        int position = getAdapterPosition();
-        if(position != RecyclerView.NO_POSITION)
-        {
-            listener.calOnItemClick(position, days.get(position));
-        }
+    public void onClick(View view) {
+        listener.onItemClick(getAdapterPosition(), days.get(getAdapterPosition()));
     }
 }
