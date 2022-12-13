@@ -6,9 +6,13 @@ import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Locale;
 
 
@@ -27,6 +31,9 @@ public class MainMenu extends AppCompatActivity {
     private long time_left_ms;
     private long end_time;
     private boolean timer_running = false;
+    private String eventName;
+    private LocalTime time;
+    private LocalDate date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +44,21 @@ public class MainMenu extends AppCompatActivity {
         countdown_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                time = LocalTime.now();
+                date = LocalDate.now();
+
                 if (timer_running){
                     startActivity(new Intent(MainMenu.this,overdose_popup.class));
+                    eventName = "Warning! Inhaler Overdosed (#>_<)";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
                 }
                 else{
                     startTimer();
+                    eventName = "Inhaler Use Recorded (・ω<)";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
+
                 }
             }
         });
