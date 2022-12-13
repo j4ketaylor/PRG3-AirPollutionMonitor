@@ -41,10 +41,14 @@ public class CALCalendarUtility {
 
         for(int i = 1; i<=42; i++)
         {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
+            if(i<dayOfWeek || i>daysInMonth+dayOfWeek-1)
+            {
                 daysInMonthArray.add(null);
+            }
             else
-                daysInMonthArray.add(LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), i - dayOfWeek));
+            {
+                daysInMonthArray.add(LocalDate.of(CALCalendarUtility.selectedDate.getYear(), CALCalendarUtility.selectedDate.getMonth(), i-dayOfWeek+1));
+            }
         }
         return daysInMonthArray;
     }
@@ -52,28 +56,14 @@ public class CALCalendarUtility {
     public static ArrayList<LocalDate> daysWeekArray(LocalDate selectedDate)
     {
         ArrayList<LocalDate> days = new ArrayList<>();
-        LocalDate currentDate = sundayOfWeek(selectedDate);
-        LocalDate endDate = currentDate.plusWeeks(1);
-
-        while(currentDate.isBefore(endDate))
+        LocalDate currentDate = selectedDate.with(DayOfWeek.MONDAY);
+        for(int i = 0; i<7; i++)
         {
             days.add(currentDate);
             currentDate = currentDate.plusDays(1);
         }
 
         return days;
-    }
-
-    private static LocalDate sundayOfWeek(LocalDate currentDate)
-    {
-        LocalDate oneWeekAgo = currentDate.minusWeeks(1);
-        while(currentDate.isAfter(oneWeekAgo))
-        {
-            if(currentDate.getDayOfWeek() == DayOfWeek.SUNDAY)
-                return currentDate;
-            currentDate = currentDate.minusDays(1);
-        }
-        return null;
     }
 
 }

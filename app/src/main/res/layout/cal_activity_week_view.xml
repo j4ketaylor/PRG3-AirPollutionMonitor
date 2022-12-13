@@ -72,15 +72,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
-            android:textAlignment="center"
-            android:textColor="@color/teal_700"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="MON"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
@@ -127,6 +118,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAT"
+            android:textAlignment="center"
+            android:textColor="@color/teal_700"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SUN"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
             android:textSize="16sp" />

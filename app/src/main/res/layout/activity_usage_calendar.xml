@@ -76,15 +76,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
-            android:textAlignment="center"
-            android:textColor="@color/teal_700"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="MON"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
@@ -135,6 +126,15 @@
             android:textColor="@color/teal_700"
             android:textSize="16sp" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SUN"
+            android:textAlignment="center"
+            android:textColor="@color/teal_700"
+            android:textSize="16sp" />
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
@@ -147,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="200dp"
         android:background="@null"
         android:backgroundTint="#68BBE3"
         android:onClick="goToWeekView"

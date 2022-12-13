@@ -62,8 +62,11 @@ public class UsageCalendar extends AppCompatActivity implements CALCalendarAdapt
 
     public void onItemClick(int position, LocalDate date)
     {
-           CALCalendarUtility.selectedDate = date;
+        if(date != null)
+        {
+            CALCalendarUtility.selectedDate = date;
             setMonthView();
+        }
     }
 
     public void goToWeekView(View view)
