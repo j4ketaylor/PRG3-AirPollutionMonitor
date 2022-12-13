@@ -33,7 +33,7 @@ public class MainMenu extends AppCompatActivity {
     Button emergency_button;
     Button inhaler_button;
 
-    private static final long start_time_ms = 3600000;
+    private static final long start_time_ms = 60000;
     private Button countdown_button;
     private CountDownTimer timer;
     private long time_left_ms;

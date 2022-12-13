@@ -216,24 +216,6 @@ public class LiveAirPollution extends AppCompatActivity {
                                 colour_list.put("Asthma Index","\uD83D\uDD34");
                             }
 
-
-                            double asthma_index = 0.25*((my_dict.get("Ozone")/my_dict_no_of_entries.get("Ozone"))
-                                    + 2*(my_dict.get("Nitrogen Dioxide")/my_dict_no_of_entries.get("Nitrogen Dioxide"))
-                                    + (my_dict.get("Sulphur Dioxide")/my_dict_no_of_entries.get("Sulphur Dioxide"))
-                                    + 2*(my_dict.get("PM2.5 Particulate")/my_dict_no_of_entries.get("PM2.5 Particulate")));
-
-                            String asthma_index_color;
-                            if (asthma_index <= 1) {
-                                asthma_index_color = "\uD83D\uDFE2";
-                            } else if (asthma_index <= 2) {
-                                asthma_index_color = "\uD83D\uDFE0";
-                            } else {
-                                asthma_index_color = "\uD83D\uDD34";
-                            }
-
-
-
-
                             air_pollution_rating_viewer.setText(
                                     "Carbon Monoxide:   " + air_pollution_ratings.get("Carbon Monoxide") + " " + colour_list.get("Carbon Monoxide") +"\n" +
                                     "Nitrogen Dioxide:     " + air_pollution_ratings.get("Nitrogen Dioxide") + " " + colour_list.get("Nitrogen Dioxide") +"\n" +
