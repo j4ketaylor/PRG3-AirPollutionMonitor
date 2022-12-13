@@ -41,4 +41,16 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/news_updates"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="400dp"
+        android:backgroundTint="#055C9D"
+        android:text="News Updates"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>
