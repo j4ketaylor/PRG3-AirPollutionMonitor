@@ -55,7 +55,7 @@ public class MainMenu extends AppCompatActivity {
                 }
                 else{
                     startTimer();
-                    eventName = "Inhaler Use Recorded (・ω<)";
+                    eventName = "Splendid! Inhaler Use Recorded (・ω<)";
                     CALEvent newCALEvent = new CALEvent(eventName, date, time);
                     CALEvent.eventsList.add(newCALEvent);
 
