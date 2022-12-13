@@ -49,13 +49,13 @@ public class MainMenu extends AppCompatActivity {
 
                 if (timer_running){
                     startActivity(new Intent(MainMenu.this,overdose_popup.class));
-                    eventName = "Warning! Inhaler Overdosed (#>_<)";
+                    eventName = "Warning! Inhaler Overdosed";
                     CALEvent newCALEvent = new CALEvent(eventName, date, time);
                     CALEvent.eventsList.add(newCALEvent);
                 }
                 else{
                     startTimer();
-                    eventName = "Splendid! Inhaler Use Recorded (・ω<)";
+                    eventName = "Splendid! Inhaler Use Recorded";
                     CALEvent newCALEvent = new CALEvent(eventName, date, time);
                     CALEvent.eventsList.add(newCALEvent);
 
