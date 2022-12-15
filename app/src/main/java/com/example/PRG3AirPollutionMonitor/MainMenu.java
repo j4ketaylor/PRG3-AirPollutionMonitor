@@ -25,10 +25,10 @@ public class MainMenu extends AppCompatActivity {
     Button next_Activity_button;
     Button emergency_button;
     Button inhaler_button;
+    Button countdown_button;
 
+    //define variables needed for the countdown button
     private static final long start_time_ms = 60000;
-    private Button countdown_button;
-    private CountDownTimer timer;
     private long time_left_ms;
     private long end_time;
     private boolean timer_running = false;
@@ -41,34 +41,13 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        countdown_button = findViewById(R.id.countdown_timer);
-        countdown_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time = LocalTime.now();
-                date = LocalDate.now();
-
-                if (timer_running){
-                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
-                    eventName = "Warning! Inhaler Overdosed";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
-                }
-                else{
-                    startTimer();
-                    eventName = "Splendid! Inhaler Use Recorded";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
-
-                }
-            }
-        });
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
         next_Activity_button = (Button) findViewById(R.id.first_activity_button);
         emergency_button = (Button) findViewById(R.id.emergency);
         inhaler_button = (Button) findViewById(R.id.inhaler_menu);
+        countdown_button = (Button) findViewById(R.id.countdown_timer);
         question1 = (TextView) findViewById(R.id.question1_id);
 
         // In question1 get the TextView use by findViewById()
@@ -103,58 +82,96 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
-    }
-
-    private void startTimer(){
-        end_time = System.currentTimeMillis() + time_left_ms;
-        timer = new CountDownTimer(time_left_ms, 1000) {
+        countdown_button.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view) {
+                time = LocalTime.now();
+                date = LocalDate.now();
+                //if timer is already running, show a popup indicating overdose and log overdose on calendar
+                if (timer_running){
+                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
+                    eventName = "Warning! Inhaler Overdosed";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
+                }
+                //starts the timer if it is not currently running, and logs the usage on calendar
+                else{
+                    startTimer();
+                    eventName = "Inhaler Use Recorded";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
+
+                }
+            }
+        });
+    }
+    //starts the timer
+    private void startTimer(){
+        //finds end time based on time left and current time of system, used to be saved to find time left after stopping the app
+        end_time = System.currentTimeMillis() + time_left_ms;
+        //initializes the timer
+        CountDownTimer timer = new CountDownTimer(time_left_ms, 1000) {
+            @Override
+            //updates text of timer per tick
             public void onTick(long l) {
                 time_left_ms = l;
                 updatetext();
             }
 
             @Override
+            //resets timer when it ends
             public void onFinish() {
-                timer_running = false;
-                countdown_button.setText("log inhaler use");
-                time_left_ms = start_time_ms;
+                resetTimer();
             }
+            //starts the countdown
         }.start();
+        //shows app that the timer is currently running
         timer_running = true;
     }
+    //resets the timer
+    private void resetTimer(){
+        //shows app that the timer is not running
+        timer_running = false;
+        countdown_button.setText("log inhaler use");
+        //resets time of timer
+        time_left_ms = start_time_ms;
+    }
+    //updates text on timer according to the current time remaining
     private void updatetext(){
+        //calculates time left in minutes and seconds
         int minutes = (int) time_left_ms/1000/60;
         int seconds = (int) time_left_ms/1000%60;
+        //formats time for display
         String time_left_formatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
         countdown_button.setText(time_left_formatted);
     }
     @Override
+    //saves information of the timer when the app is stopped
     protected void onStop(){
         super.onStop();
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putLong("time_left",time_left_ms);
         editor.putLong("end_time",end_time);
         editor.putBoolean("running",timer_running);
         editor.apply();
     }
     @Override
+    //loads information of the timer before it was stopped when the app is started
     protected void onStart(){
         super.onStart();
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
-        time_left_ms = pref.getLong("time_left",start_time_ms);
         timer_running = pref.getBoolean("running",false);
+        //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
+            //finds time left by subtracting current time of the system from saved end time
             time_left_ms = end_time - System.currentTimeMillis();
+            //resets the timer if the app was stopped for longer than the time left before being stopped
             if(time_left_ms<0){
-                time_left_ms = start_time_ms;
-                timer_running = false;
-                countdown_button.setText("log inhaler use");
-            }else{
+                resetTimer();
+            }
+            //starts the timer again otherwise
+            else{
                 startTimer();
             }
         }
