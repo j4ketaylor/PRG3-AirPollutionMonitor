@@ -84,7 +84,7 @@ public class Emergency extends AppCompatActivity {
         whatToDoText.setSpan(new ForegroundColorSpan(Color.BLACK),534,whatToDoText.length(),0);
 
         SpannableStringBuilder nhsLink = new SpannableStringBuilder();
-        nhsLink.append("\n\nFor more information, please visit https://www.nhs.uk/conditions/asthma/asthma-attack/\n");
+        nhsLink.append("\n\nFor more information, please visit: https://www.nhs.uk/conditions/asthma/asthma-attack/\n");
         nhsLink.setSpan(new AbsoluteSizeSpan(75),0,nhsLink.length(),0);
         nhsLink.setSpan(new StyleSpan(Typeface.BOLD),0,nhsLink.length(),0);
         ClickableSpan nhsLinkSpan = new ClickableSpan() {
@@ -95,7 +95,7 @@ public class Emergency extends AppCompatActivity {
                 view.getContext().startActivity(intent);
             }
         };
-        nhsLink.setSpan(nhsLinkSpan,35,nhsLink.length(),0);
+        nhsLink.setSpan(nhsLinkSpan,37,nhsLink.length(),0);
 
         SpannableStringBuilder emergency_info = new SpannableStringBuilder();
         emergency_info.append(symptomsTitle);
