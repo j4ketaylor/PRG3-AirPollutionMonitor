@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.PRG3AirPollutionMonitor">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,32 +16,44 @@
         android:theme="@style/Theme.Letstryagain"
         tools:targetApi="31">
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.overdose_popup"
-            android:theme="@style/overdose_popup"
+            android:name=".SortedAreas"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.PrescriptionDetails"
+            android:name=".NewsUpdates"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.UsageCalendar"
+            android:name=".OverdosePopup"
+            android:exported="false"
+            android:theme="@style/overdose_popup" />
+        <activity
+            android:name=".PrescriptionDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.LiveAirPollution"
+            android:name=".UsageCalendar"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.InhalerMenu"
+            android:name=".CALWeekView"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.Emergency"
+            android:name=".CALEditEvent"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.AirQuality"
+            android:name=".LiveAirPollution"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.AirQualityPlot"
+            android:name=".InhalerMenu"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.MainMenu"
+            android:name=".Emergency"
+            android:exported="false" />
+        <activity
+            android:name=".AirQuality"
+            android:exported="false" />
+        <activity
+            android:name=".AirQualityPlot"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +62,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
