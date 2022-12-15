@@ -88,6 +88,7 @@ public class PrescriptionDetails extends AppCompatActivity {
 
 
     public void updateViews() {
+
         try {
             Integer userUses = Integer.valueOf(text);
             Integer inhalerUses = userUses - MainMenu.inhaler_count;

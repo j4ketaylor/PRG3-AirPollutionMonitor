@@ -28,7 +28,8 @@ public class MainMenu extends AppCompatActivity {
     Button countdown_button;
 
     //define variables needed for the countdown button
-    public static long start_time_ms = 60000;
+
+    public static long start_time_ms;
     private long time_left_ms;
     private long end_time;
     private boolean timer_running = false;
@@ -38,12 +39,16 @@ public class MainMenu extends AppCompatActivity {
     public static int inhaler_count = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
+        try {
+            System.out.println(PrescriptionDetails.text3);
+            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+        } catch (NumberFormatException e) {
+            System.out.println("This happened");
+            start_time_ms = 6000;
+        }
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
         next_Activity_button = (Button) findViewById(R.id.first_activity_button);
@@ -85,6 +90,13 @@ public class MainMenu extends AppCompatActivity {
         });
 
         countdown_button.setOnClickListener(v -> {
+            try {
+                System.out.println(PrescriptionDetails.text3);
+                start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+            } catch (NumberFormatException e) {
+                System.out.println("This happened");
+                start_time_ms = 6000;
+            }
             time = LocalTime.now();
             date = LocalDate.now();
             inhaler_count++;
@@ -108,6 +120,13 @@ public class MainMenu extends AppCompatActivity {
     }
     //starts the timer
     private void startTimer(){
+        try {
+            System.out.println(PrescriptionDetails.text3);
+            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+        } catch (NumberFormatException e) {
+            System.out.println("This happened");
+            start_time_ms = 6000;
+        }
         //finds end time based on time left and current time of system, used to be saved to find time left after stopping the app
         end_time = System.currentTimeMillis() + time_left_ms;
         //initializes the timer
@@ -131,6 +150,13 @@ public class MainMenu extends AppCompatActivity {
     }
     //resets the timer
     private void resetTimer(){
+        try {
+            System.out.println(PrescriptionDetails.text3);
+            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+        } catch (NumberFormatException e) {
+            System.out.println("This happened");
+            start_time_ms = 6000;
+        }
         //shows app that the timer is not running
         timer_running = false;
         //resets text on timer
@@ -163,13 +189,14 @@ public class MainMenu extends AppCompatActivity {
     @Override
     //determines action of timer based on information saved when the app was stopped
     protected void onStart(){
-        try {
-            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60*1000;
-        }
-        catch (NumberFormatException e) {
-            start_time_ms = 60000;
-        }
         super.onStart();
+        try {
+            System.out.println(PrescriptionDetails.text3);
+            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+        } catch (NumberFormatException e) {
+            System.out.println("This happened");
+            start_time_ms = 6000;
+        }
         //loads information of the timer before it was stopped when the app is started
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         //defaults timer as not running
@@ -191,6 +218,4 @@ public class MainMenu extends AppCompatActivity {
             }
         }
     }
-
-
 }
