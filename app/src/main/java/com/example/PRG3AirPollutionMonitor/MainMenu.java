@@ -110,6 +110,7 @@ public class MainMenu extends AppCompatActivity {
             }
             //starts the timer if it is not currently running, and logs the usage on calendar
             else{
+                time_left_ms = start_time_ms;
                 startTimer();
                 eventName = "Inhaler Use Recorded";
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
@@ -202,11 +203,7 @@ public class MainMenu extends AppCompatActivity {
         //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
         //default time left is the start time
-        try{
-            time_left_ms = pref.getLong("time_left_ms", Long.valueOf(PrescriptionDetails.text3)*60000);
-        } catch(NumberFormatException e){
-            time_left_ms = 6000;
-        }
+            time_left_ms = pref.getLong("time_left_ms",0);
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
