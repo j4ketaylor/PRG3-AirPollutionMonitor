@@ -20,7 +20,6 @@ public class PrescriptionDetails extends AppCompatActivity {
     private EditText new_prescription_number_of_uses;
     private EditText new_prescription_expiry_date;
 
-    private Button apply_text_button;
     private Button save_button;
 
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -45,24 +44,17 @@ public class PrescriptionDetails extends AppCompatActivity {
         new_prescription_number_of_uses = (EditText) findViewById(R.id.new_prescription_number_of_uses_input);
         new_prescription_expiry_date = (EditText) findViewById(R.id.new_prescription_expiry_date_input);
         new_information_text = (TextView) findViewById(R.id.new_information);
-        apply_text_button = (Button) findViewById(R.id.apply_text_button);
         save_button = (Button) findViewById(R.id.save_text_button);
 
         prescription_expiry_date_display.setText("Expiry Date: \n");
         remaining_inhaler_uses_display.setText("Number of uses: \n");
         new_information_text.setText("Enter new information:\n");
 
-        apply_text_button.setOnClickListener(new View.OnClickListener() {
+        save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 remaining_inhaler_uses_text.setText(new_prescription_number_of_uses.getText().toString());
                 prescription_expiry_date_text.setText(new_prescription_expiry_date.getText().toString());
-            }
-        });
-
-        save_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 saveData();
             }
         });
@@ -93,6 +85,12 @@ public class PrescriptionDetails extends AppCompatActivity {
             Integer inhalerUses = userUses - MainMenu.inhaler_count;
             remaining_inhaler_uses_text.setText(inhalerUses.toString());
             prescription_expiry_date_text.setText(text2);
+
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putString(TEXT, inhalerUses.toString());
+            editor.apply();
         } catch(NumberFormatException e) {
             System.out.println("Error");
         }
