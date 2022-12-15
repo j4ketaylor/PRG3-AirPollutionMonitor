@@ -75,7 +75,7 @@ public class PrescriptionDetails extends AppCompatActivity {
 
         editor.putString(TEXT, remaining_inhaler_uses_text.getText().toString());
         editor.putString(TEXT2, prescription_expiry_date_text.getText().toString());
-        editor.putString(TEXT3, new_prescription_dosage_interval.getText().toString());
+        editor.putString(TEXT3, dosage_interval);
         editor.apply();
     }
 

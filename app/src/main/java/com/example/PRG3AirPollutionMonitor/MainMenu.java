@@ -37,7 +37,6 @@ public class MainMenu extends AppCompatActivity {
     private LocalDate date;
     public static int inhaler_count = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,18 +163,19 @@ public class MainMenu extends AppCompatActivity {
     @Override
     //determines action of timer based on information saved when the app was stopped
     protected void onStart(){
+        try {
+            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60*1000;
+        }
+        catch (NumberFormatException e) {
+            start_time_ms = 60000;
+        }
         super.onStart();
         //loads information of the timer before it was stopped when the app is started
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
         //default time left is the start time
-        try {
-            time_left_ms = Long.valueOf(PrescriptionDetails.text3)*1000*60;
-        } catch (NumberFormatException e) {
-            time_left_ms = pref.getLong("time_left_ms", start_time_ms);
-        }
-
+        time_left_ms = pref.getLong("time_left_ms", start_time_ms);
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
