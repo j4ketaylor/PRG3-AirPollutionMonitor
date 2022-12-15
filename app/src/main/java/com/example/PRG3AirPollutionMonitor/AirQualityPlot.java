@@ -1,5 +1,6 @@
 package com.example.PRG3AirPollutionMonitor;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ public class AirQualityPlot extends AppCompatActivity {
 
     TextView question3;
     LineChart testchart;
+    TextView xlabel;
+    TextView ylabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,12 @@ public class AirQualityPlot extends AppCompatActivity {
 
         question3 = (TextView) findViewById(R.id.question3_id);
         question3.setText("Which area would you like to view history for?\n");
+
+        xlabel = (TextView) findViewById(R.id.xlabel_id);
+        xlabel.setText("Year");
+
+        ylabel = (TextView) findViewById(R.id.ylabel_id);
+        ylabel.setText("Asthma Index");
 
         configureLineChart();
 
