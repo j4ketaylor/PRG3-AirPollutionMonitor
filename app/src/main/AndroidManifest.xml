@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Letstryagain"
         tools:targetApi="31">
         <activity
+            android:name=".SortedAreas"
+            android:exported="false" />
+        <activity
             android:name=".NewsUpdates"
             android:exported="false" />
         <activity
@@ -29,10 +32,10 @@
             android:name=".UsageCalendar"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.CALWeekView"
+            android:name=".CALWeekView"
             android:exported="false" />
         <activity
-            android:name="com.example.PRG3AirPollutionMonitor.CALEditEvent"
+            android:name=".CALEditEvent"
             android:exported="false" />
         <activity
             android:name=".LiveAirPollution"

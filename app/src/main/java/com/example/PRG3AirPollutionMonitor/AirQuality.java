@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AirQuality extends AppCompatActivity {
 
-    Button recommended_places_to_live_button, previous_button,live_london_pollution_levels_button,news_updates_button;
+    Button recommended_places_to_live_button,live_london_pollution_levels_button,news_updates_button,sorted_areas_button;
     TextView air_quality_text_view;
 
     @Override
@@ -30,6 +30,7 @@ public class AirQuality extends AppCompatActivity {
         recommended_places_to_live_button = (Button) findViewById(R.id.recommended_places_to_live);
         live_london_pollution_levels_button = (Button) findViewById(R.id.live_london_pollution_levels);
         news_updates_button = (Button) findViewById(R.id.news_updates);
+        sorted_areas_button = (Button) findViewById(R.id.list_of_areas);
         recommended_places_to_live_button.setOnClickListener(v -> {
             Intent intent = new Intent(AirQuality.this, AirQualityPlot.class);
             startActivity(intent);
@@ -44,6 +45,11 @@ public class AirQuality extends AppCompatActivity {
            Intent intent = new Intent(AirQuality.this,NewsUpdates.class);
            startActivity(intent);
        });
+
+        sorted_areas_button.setOnClickListener(v -> {
+            Intent intent = new Intent(AirQuality.this,SortedAreas.class);
+            startActivity(intent);
+        });
 
     }
 }
