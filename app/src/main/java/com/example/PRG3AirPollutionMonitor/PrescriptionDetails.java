@@ -1,5 +1,6 @@
 package com.example.PRG3AirPollutionMonitor;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -87,7 +88,13 @@ public class PrescriptionDetails extends AppCompatActivity {
     }
 
     public void updateViews() {
-        remaining_inhaler_uses_text.setText(text);
-        prescription_expiry_date_text.setText(text2);
+        try {
+            Integer userUses = Integer.valueOf(text);
+            Integer inhalerUses = userUses - MainMenu.inhaler_count;
+            remaining_inhaler_uses_text.setText(inhalerUses.toString());
+            prescription_expiry_date_text.setText(text2);
+        } catch(NumberFormatException e) {
+            System.out.println("Error");
+        }
     }
 }

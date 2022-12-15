@@ -35,6 +35,7 @@ public class MainMenu extends AppCompatActivity {
     private String eventName;
     private LocalTime time;
     private LocalDate date;
+    public static int inhaler_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 time = LocalTime.now();
                 date = LocalDate.now();
+                inhaler_count++;
 
                 if (timer_running){
                     startActivity(new Intent(MainMenu.this,OverdosePopup.class));
