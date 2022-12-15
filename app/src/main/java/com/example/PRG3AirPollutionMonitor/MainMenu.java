@@ -42,29 +42,7 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        countdown_button = findViewById(R.id.countdown_timer);
-        countdown_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time = LocalTime.now();
-                date = LocalDate.now();
-                inhaler_count++;
 
-                if (timer_running){
-                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
-                    eventName = "Warning! Inhaler Overdosed";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
-                }
-                else{
-                    startTimer();
-                    eventName = "Splendid! Inhaler Use Recorded";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
-
-                }
-            }
-        });
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
@@ -109,6 +87,7 @@ public class MainMenu extends AppCompatActivity {
         countdown_button.setOnClickListener(v -> {
             time = LocalTime.now();
             date = LocalDate.now();
+            inhaler_count++;
             //if timer is already running, show a popup indicating overdose and log overdose on calendar
             if (timer_running){
                 Intent intent = new Intent(MainMenu.this,OverdosePopup.class);
