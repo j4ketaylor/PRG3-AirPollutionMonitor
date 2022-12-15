@@ -44,7 +44,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         try {
             System.out.println(PrescriptionDetails.text3);
-            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
         } catch (NumberFormatException e) {
             System.out.println("This happened");
             start_time_ms = 6000;
@@ -92,7 +92,7 @@ public class MainMenu extends AppCompatActivity {
         countdown_button.setOnClickListener(v -> {
             try {
                 System.out.println(PrescriptionDetails.text3);
-                start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+                start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
             } catch (NumberFormatException e) {
                 System.out.println("This happened");
                 start_time_ms = 6000;
@@ -122,7 +122,7 @@ public class MainMenu extends AppCompatActivity {
     private void startTimer(){
         try {
             System.out.println(PrescriptionDetails.text3);
-            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
         } catch (NumberFormatException e) {
             System.out.println("This happened");
             start_time_ms = 6000;
@@ -152,7 +152,7 @@ public class MainMenu extends AppCompatActivity {
     private void resetTimer(){
         try {
             System.out.println(PrescriptionDetails.text3);
-            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
         } catch (NumberFormatException e) {
             System.out.println("This happened");
             start_time_ms = 6000;
@@ -192,7 +192,7 @@ public class MainMenu extends AppCompatActivity {
         super.onStart();
         try {
             System.out.println(PrescriptionDetails.text3);
-            start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
+            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
         } catch (NumberFormatException e) {
             System.out.println("This happened");
             start_time_ms = 6000;
@@ -202,7 +202,11 @@ public class MainMenu extends AppCompatActivity {
         //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
         //default time left is the start time
-        time_left_ms = pref.getLong("time_left_ms", start_time_ms);
+        try{
+            time_left_ms = pref.getLong("time_left_ms", Long.valueOf(PrescriptionDetails.text3)*60000);
+        } catch(NumberFormatException e){
+            time_left_ms = 6000;
+        }
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
