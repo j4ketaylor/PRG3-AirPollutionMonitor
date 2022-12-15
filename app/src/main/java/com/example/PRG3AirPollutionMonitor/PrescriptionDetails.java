@@ -91,6 +91,7 @@ public class PrescriptionDetails extends AppCompatActivity {
 
             editor.putString(TEXT, inhalerUses.toString());
             editor.apply();
+            MainMenu.inhaler_count = 0;
         } catch(NumberFormatException e) {
             System.out.println("Error");
         }
