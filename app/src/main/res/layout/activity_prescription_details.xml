@@ -80,15 +80,15 @@
         android:hint="Expiry date (DD/MM/YYYY)"
         android:inputType="date" />
 
-    <Button
-        android:id="@+id/apply_text_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:backgroundTint="#68BBE3"
-        android:layout_centerHorizontal="true"
-        android:text="Apply Prescription"
-        android:textColor="@android:color/background_light" />
+<!--    <Button-->
+<!--        android:id="@+id/apply_text_button"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="500dp"-->
+<!--        android:backgroundTint="#68BBE3"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text="Apply Prescription"-->
+<!--        android:textColor="@android:color/background_light" />-->
 
     <Button
         android:id="@+id/save_text_button"

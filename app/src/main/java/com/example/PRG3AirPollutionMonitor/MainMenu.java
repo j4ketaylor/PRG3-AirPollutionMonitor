@@ -35,12 +35,36 @@ public class MainMenu extends AppCompatActivity {
     private String eventName;
     private LocalTime time;
     private LocalDate date;
+    public static int inhaler_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        countdown_button = findViewById(R.id.countdown_timer);
+        countdown_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                time = LocalTime.now();
+                date = LocalDate.now();
+                inhaler_count++;
+
+                if (timer_running){
+                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
+                    eventName = "Warning! Inhaler Overdosed";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
+                }
+                else{
+                    startTimer();
+                    eventName = "Splendid! Inhaler Use Recorded";
+                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                    CALEvent.eventsList.add(newCALEvent);
+
+                }
+            }
+        });
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
