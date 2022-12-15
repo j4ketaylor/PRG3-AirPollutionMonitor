@@ -82,26 +82,24 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        countdown_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time = LocalTime.now();
-                date = LocalDate.now();
-                //if timer is already running, show a popup indicating overdose and log overdose on calendar
-                if (timer_running){
-                    startActivity(new Intent(MainMenu.this,OverdosePopup.class));
-                    eventName = "Warning! Inhaler Overdosed";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
-                }
-                //starts the timer if it is not currently running, and logs the usage on calendar
-                else{
-                    startTimer();
-                    eventName = "Inhaler Use Recorded";
-                    CALEvent newCALEvent = new CALEvent(eventName, date, time);
-                    CALEvent.eventsList.add(newCALEvent);
+        countdown_button.setOnClickListener(v -> {
+            time = LocalTime.now();
+            date = LocalDate.now();
+            //if timer is already running, show a popup indicating overdose and log overdose on calendar
+            if (timer_running){
+                Intent intent = new Intent(MainMenu.this,OverdosePopup.class);
+                startActivity(intent);
+                eventName = "Warning! Inhaler Overdosed";
+                CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                CALEvent.eventsList.add(newCALEvent);
+            }
+            //starts the timer if it is not currently running, and logs the usage on calendar
+            else{
+                startTimer();
+                eventName = "Inhaler Use Recorded";
+                CALEvent newCALEvent = new CALEvent(eventName, date, time);
+                CALEvent.eventsList.add(newCALEvent);
 
-                }
             }
         });
     }
@@ -132,23 +130,26 @@ public class MainMenu extends AppCompatActivity {
     private void resetTimer(){
         //shows app that the timer is not running
         timer_running = false;
+        //resets text on timer
         countdown_button.setText("log inhaler use");
         //resets time of timer
         time_left_ms = start_time_ms;
     }
-    //updates text on timer according to the current time remaining
+    //updates text on timer according to the time left
     private void updatetext(){
         //calculates time left in minutes and seconds
         int minutes = (int) time_left_ms/1000/60;
         int seconds = (int) time_left_ms/1000%60;
         //formats time for display
         String time_left_formatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
+        //sets text on timer to time left
         countdown_button.setText(time_left_formatted);
     }
     @Override
     //saves information of the timer when the app is stopped
     protected void onStop(){
         super.onStop();
+        //adds variables to a shared preference
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putLong("end_time",end_time);
@@ -157,11 +158,14 @@ public class MainMenu extends AppCompatActivity {
         editor.apply();
     }
     @Override
-    //loads information of the timer before it was stopped when the app is started
+    //determines action of timer based on information saved when the app was stopped
     protected void onStart(){
         super.onStart();
+        //loads information of the timer before it was stopped when the app is started
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
+        //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
+        //default time left is the start time
         time_left_ms = pref.getLong("time_left_ms", start_time_ms);
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
