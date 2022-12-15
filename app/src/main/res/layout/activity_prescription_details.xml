@@ -80,7 +80,19 @@
         android:hint="Expiry date (DD/MM/YYYY)"
         android:inputType="date" />
 
-<!--    <Button-->
+    <EditText
+        android:id="@+id/new_prescription_dosage_interval_input"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="490dp"
+        android:ems="10"
+        android:hint="Dosage interval (minutes)"
+        android:inputType="date" />
+
+
+    <!--    <Button-->
 <!--        android:id="@+id/apply_text_button"-->
 <!--        android:layout_width="250dp"-->
 <!--        android:layout_height="wrap_content"-->

@@ -28,7 +28,7 @@ public class MainMenu extends AppCompatActivity {
     Button countdown_button;
 
     //define variables needed for the countdown button
-    private static final long start_time_ms = 60000;
+    public static long start_time_ms = 60000;
     private long time_left_ms;
     private long end_time;
     private boolean timer_running = false;
@@ -36,6 +36,7 @@ public class MainMenu extends AppCompatActivity {
     private LocalTime time;
     private LocalDate date;
     public static int inhaler_count = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +170,12 @@ public class MainMenu extends AppCompatActivity {
         //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
         //default time left is the start time
-        time_left_ms = pref.getLong("time_left_ms", start_time_ms);
+        try {
+            time_left_ms = Long.valueOf(PrescriptionDetails.text3)*1000*60;
+        } catch (NumberFormatException e) {
+            time_left_ms = pref.getLong("time_left_ms", start_time_ms);
+        }
+
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
