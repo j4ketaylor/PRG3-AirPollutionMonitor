@@ -61,6 +61,7 @@ public class PrescriptionDetails extends AppCompatActivity {
                 prescription_expiry_date_text.setText(new_prescription_expiry_date.getText().toString());
                 dosage_interval = new_prescription_dosage_interval.getText().toString();
                 saveData();
+                loadData();
             }
         });
 
@@ -104,5 +105,10 @@ public class PrescriptionDetails extends AppCompatActivity {
         } catch(NumberFormatException e) {
             System.out.println("Error");
         }
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        MainMenu.saveVar(this);
     }
 }
