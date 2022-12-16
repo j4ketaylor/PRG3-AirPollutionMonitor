@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.onItemClickListener
@@ -21,12 +23,14 @@ public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.o
     private TextView monthYearText;
     private RecyclerView calendarRecView;
     private ListView eventListView;
+    CALDBHelper XCALDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cal_activity_week_view);
+        XCALDBHelper = new CALDBHelper(this);
         initWidgets();
         setWeekView();
     }
@@ -39,6 +43,16 @@ public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.o
     }
     private void setWeekView()
     {
+        Cursor DBData = XCALDBHelper.accessData();
+        if (CALEvent.eventsList.isEmpty()) {
+            while (DBData.moveToNext()) {
+                String name = DBData.getString(1);
+                LocalDate date = LocalDate.parse(DBData.getString(2));
+                LocalTime time = LocalTime.parse(DBData.getString(3));
+                CALEvent newCALEvent = new CALEvent(name, date, time);
+                CALEvent.eventsList.add(newCALEvent);
+            }
+        }
         monthYearText.setText(monthYearFromDate(CALCalendarUtility.selectedDate));
         ArrayList<LocalDate> days = daysWeekArray(CALCalendarUtility.selectedDate);
         CALCalendarAdapt CALCalendarAdapt = new CALCalendarAdapt(days,this);

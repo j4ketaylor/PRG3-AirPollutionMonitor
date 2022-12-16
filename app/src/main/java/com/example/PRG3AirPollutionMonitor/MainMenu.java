@@ -37,11 +37,13 @@ public class MainMenu extends AppCompatActivity {
     private LocalTime time;
     private LocalDate date;
     public static int inhaler_count = 0;
+    CALDBHelper XCALDBHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        XCALDBHelper = new CALDBHelper(this);
         try {
             System.out.println(PrescriptionDetails.text3);
             start_time_ms = Integer.valueOf(PrescriptionDetails.text3);
@@ -107,6 +109,7 @@ public class MainMenu extends AppCompatActivity {
                 eventName = "Warning! Inhaler Overdosed";
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
                 CALEvent.eventsList.add(newCALEvent);
+                boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
             }
             //starts the timer if it is not currently running, and logs the usage on calendar
             else{
@@ -114,6 +117,7 @@ public class MainMenu extends AppCompatActivity {
                 eventName = "Inhaler Use Recorded";
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
                 CALEvent.eventsList.add(newCALEvent);
+                boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
 
             }
         });
