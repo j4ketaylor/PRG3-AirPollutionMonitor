@@ -106,4 +106,9 @@ public class PrescriptionDetails extends AppCompatActivity {
             System.out.println("Error");
         }
     }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        MainMenu.saveVar(this);
+    }
 }
