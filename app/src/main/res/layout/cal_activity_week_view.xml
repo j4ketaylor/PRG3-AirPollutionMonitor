@@ -13,10 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Weekly Calendar"
-        android:textSize="30sp"
-        android:background="#68BBE3"
-        android:textColor="@android:color/background_light"
+        android:text="Daily Calendar"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -143,7 +141,7 @@
         android:layout_height="60dp"
         android:background="@null"
         android:onClick="newCALEvent"
-        android:text="Manual Record"
+        android:text="Record Inhaler Use"
         android:backgroundTint="#68BBE3"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
