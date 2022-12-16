@@ -14,6 +14,7 @@ public class CALEditEvent extends AppCompatActivity {
     private EditText eventName;
     private TextView eventDate, eventTime;
     private LocalTime time;
+    CALDBHelper XCALDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,6 +25,7 @@ public class CALEditEvent extends AppCompatActivity {
         time = LocalTime.now();
         eventDate.setText("Date: " + CALCalendarUtility.formatDate(CALCalendarUtility.selectedDate));
         eventTime.setText("Time: " + CALCalendarUtility.formatTime(time));
+        XCALDBHelper = new CALDBHelper(this);
     }
 
     private void initWidgets()
@@ -38,6 +40,8 @@ public class CALEditEvent extends AppCompatActivity {
         String name = eventName.getText().toString();
         CALEvent newCALEvent = new CALEvent(name, CALCalendarUtility.selectedDate, time);
         CALEvent.eventsList.add(newCALEvent);
-        finish();
+        boolean DataInserted = XCALDBHelper.insertData(name, CALCalendarUtility.selectedDate, time);
+        if(DataInserted)
+            finish();
     }
 }
