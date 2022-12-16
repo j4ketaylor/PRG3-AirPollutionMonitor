@@ -66,6 +66,8 @@ public class UsageCalendar extends AppCompatActivity implements CALCalendarAdapt
         {
             CALCalendarUtility.selectedDate = date;
             setMonthView();
+            Intent intent = new Intent(this, CALWeekView.class);
+            startActivity(intent);
         }
     }
 

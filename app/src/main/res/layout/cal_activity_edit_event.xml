@@ -13,10 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Manual Record"
-        android:textSize="30sp"
-        android:background="#68BBE3"
-        android:textColor="@android:color/background_light"
+        android:text="Record Inhaler Use"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:text="Inhaler Use"
+        android:text="Inhaler Use Details"
         android:textSize="25sp"
         android:textAlignment="center"
         android:textColor="#003060"
