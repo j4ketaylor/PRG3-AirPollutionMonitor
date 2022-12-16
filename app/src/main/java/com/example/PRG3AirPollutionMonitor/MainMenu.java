@@ -38,12 +38,17 @@ public class MainMenu extends AppCompatActivity {
     private LocalTime time;
     private LocalDate date;
     public static int inhaler_count = 0;
+
     private static Context context;
+
+    CALDBHelper XCALDBHelper;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 //        try {
 //            System.out.println(PrescriptionDetails.text3);
 //            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
@@ -51,6 +56,9 @@ public class MainMenu extends AppCompatActivity {
 //            System.out.println("This happened");
 //            start_time_ms = 6000;
 //        }
+
+        XCALDBHelper = new CALDBHelper(this);
+
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
         next_Activity_button = (Button) findViewById(R.id.first_activity_button);
@@ -109,6 +117,7 @@ public class MainMenu extends AppCompatActivity {
                 eventName = "Warning! Inhaler Overdosed";
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
                 CALEvent.eventsList.add(newCALEvent);
+                boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
             }
             //starts the timer if it is not currently running, and logs the usage on calendar
             else{
@@ -117,6 +126,7 @@ public class MainMenu extends AppCompatActivity {
                 eventName = "Inhaler Use Recorded";
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
                 CALEvent.eventsList.add(newCALEvent);
+                boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
 
             }
         });
