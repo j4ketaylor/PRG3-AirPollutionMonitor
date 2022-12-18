@@ -51,7 +51,7 @@ public class LiveAirPollution extends AppCompatActivity {
             "Enfield",
             "Greenwich",
             "Hackney",
-            "Hammershith and Fulham",
+            "Hammersmith and Fulham",
             "Haringey",
             "Harrow",
             "Havering",
@@ -106,10 +106,9 @@ public class LiveAirPollution extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Item: " +item,Toast.LENGTH_SHORT).show();
 
                 x = items[Arrays.asList(items).indexOf(item)].toLowerCase().replaceAll("\\s+","");
-                String y;
                 String data = "";
                 getAQI getInformation = new getAQI(x, data);
-                y = getInformation.AQIOutput();
+                String y = getInformation.AQIOutput();
                 air_pollution_rating_viewer.setText(y);
 
 

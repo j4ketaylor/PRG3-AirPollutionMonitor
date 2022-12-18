@@ -73,31 +73,54 @@ public class getAQI {
 
             JSONObject myObject = new JSONObject(data);
             JSONObject groupName = myObject.getJSONObject("DailyAirQualityIndex").getJSONObject("LocalAuthority");
+            try {
+                JSONArray arr = groupName.getJSONArray("Site");
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject sites = arr.getJSONObject(i);
+                    try {
+                        JSONObject species = sites.getJSONObject("Species");
+                        my_dict.put(species.get("@SpeciesDescription").toString(), Double.parseDouble(species.get("@AirQualityIndex").toString()) + (my_dict.get(species.get("@SpeciesDescription").toString())));
+                        my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
 
-            JSONArray arr = groupName.getJSONArray("Site");
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject sites = arr.getJSONObject(i);
-                try {
-                    JSONObject species = sites.getJSONObject("Species");
-                    my_dict.put(species.get("@SpeciesDescription").toString(), Double.parseDouble(species.get("@AirQualityIndex").toString()) + (my_dict.get(species.get("@SpeciesDescription").toString())));
-                    my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
+                    } catch (Exception e) {
+                        JSONArray species_array = sites.getJSONArray("Species");
+                        for (int j = 0; j <= species_array.length(); j++) {
+                            try {
+                                JSONObject species = species_array.getJSONObject(j);
+                                my_dict.put(species.get("@SpeciesDescription").toString(),
+                                        Double.parseDouble(species.get("@AirQualityIndex").toString()) +
+                                                (my_dict.get(species.get("@SpeciesDescription").toString())));
 
-                } catch (Exception e) {
-                    JSONArray species_array = sites.getJSONArray("Species");
-                    for (int j = 0; i <= species_array.length(); j++) {
-                        try {
-                            JSONObject species = species_array.getJSONObject(j);
-                            my_dict.put(species.get("@SpeciesDescription").toString(),
-                                    Double.parseDouble(species.get("@AirQualityIndex").toString()) +
-                                            (my_dict.get(species.get("@SpeciesDescription").toString())));
-
-                            my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
-                        } catch (Exception f) {
-                            break;
+                                my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
+                            } catch (Exception f) {
+                                break;
+                            }
                         }
                     }
                 }
+            } catch (JSONException g) {
+                JSONObject obj = groupName.getJSONObject("Site");
+                try {
+                    JSONArray species_array = obj.getJSONArray("Species");
+                    for (int k = 0; k < species_array.length(); k++) {
+                        JSONObject species = species_array.getJSONObject(k);
+                        my_dict.put(species.get("@SpeciesDescription").toString(),
+                                Double.parseDouble(species.get("@AirQualityIndex").toString()) +
+                                        (my_dict.get(species.get("@SpeciesDescription").toString())));
+
+                        my_dict_no_of_entries.put(species.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species.get("@SpeciesDescription").toString()) + 1);
+                    }
+                } catch (JSONException h) {
+                    System.out.println(obj);
+                    JSONObject species_object = obj.getJSONObject("Species");
+                    my_dict.put(species_object.get("@SpeciesDescription").toString(),
+                            Double.parseDouble(species_object.get("@AirQualityIndex").toString()) +
+                                    (my_dict.get(species_object.get("@SpeciesDescription").toString())));
+
+                    my_dict_no_of_entries.put(species_object.get("@SpeciesDescription").toString(), my_dict_no_of_entries.get(species_object.get("@SpeciesDescription").toString()) + 1);
+                }
             }
+
 
             for (int i = 0; i < 6; i++) {
                 if (my_dict_no_of_entries.get(species_list.get(i)) == 0) {
@@ -121,10 +144,10 @@ public class getAQI {
             String asthma_index_color;
             if (asthma_index <= 1) {
                 colour_list.put("Asthma Index","\uD83D\uDFE2");
-            } else if (asthma_index <= 2) {
-                colour_list.put("Asthma Index","\uD83D\uDFE0");
+//            } else if (asthma_index <= 2) {
+//                colour_list.put("Asthma Index","\uD83D\uDFE0");
             } else {
-                colour_list.put("Asthma Index","\uD83D\uDD34");
+                colour_list.put("Asthma Index","\uD83D\uDFE0");
             }
 
             return asthma_index.toString();
@@ -136,9 +159,7 @@ public class getAQI {
 //                            "PM10 Particulate:    " + air_pollution_ratings.get("PM10 Particulate") + " " + colour_list.get("PM10 Particulate") +"\n" +
 //                            "PM2.5 Particulate:   " + air_pollution_ratings.get("PM2.5 Particulate") + " " + colour_list.get("PM2.5 Particulate") +"\n" +
 //                            "Sulphur Dioxide:       " + air_pollution_ratings.get("Sulphur Dioxide") + " " + colour_list.get("Sulphur Dioxide") +"\n\n" +
-//                            "Asthma Index:           " + asthma_index + " " + colour_list.get("Asthma Index"));
-
-
+//                            "Asthma Index:           " + asthma_index + " " + colour_list.get("Asthma Index") + "\n" + myObject.toString());
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
