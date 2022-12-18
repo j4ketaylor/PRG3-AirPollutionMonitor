@@ -2,29 +2,49 @@ package com.example.PRG3AirPollutionMonitor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BulletSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Type;
+
 public class Emergency extends AppCompatActivity {
 
     TextView emergency_information_text;
-    TextView emergency_information_NHS_text;
+    TextView whatToDo_title;
+    TextView whatToDo_text;
+    TextView whatToDo_info;
+    TextView call_999_title;
+    TextView call_999_text;
+    TextView AE_info;
+    TextView call_111_title;
+    TextView call_111_text;
+    TextView NHS111_info;
+    TextView urgentSymptoms_title;
+    TextView urgentSymptoms_text;
+    TextView urgentSymptoms_info;
+    TextView routine_title;
+    TextView routine_text;
+    TextView reference_text;
 
     private int titleColor = Color.parseColor("#0E86D4");
 
@@ -33,79 +53,112 @@ public class Emergency extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
 
+        Typeface mediumFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+        Typeface boldFont = Typeface.createFromAsset(getAssets(),"fonts/Roboto-Bold.ttf");
+        Typeface regularFont = Typeface.createFromAsset(getAssets(),"fonts/Roboto-Regular.ttf");
+        Typeface lightFont = Typeface.createFromAsset(getAssets(),"fonts/Roboto-Light.ttf");
+
         emergency_information_text = (TextView) findViewById(R.id.emergency_information);
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-        emergency_information_text.setTypeface(customFont);
+        emergency_information_text.setTypeface(mediumFont);
         emergency_information_text.setText("Emergency Information\n");
 
-        emergency_information_NHS_text = (TextView) findViewById(R.id.emergency_information_NHS);
+        whatToDo_title = (TextView) findViewById(R.id.whatToDo_title);
+        whatToDo_title.setTypeface(boldFont);
+        whatToDo_title.setText("What to do if you have an asthma attack:");
 
-        SpannableStringBuilder symptomsTitle = new SpannableStringBuilder();
-        symptomsTitle.append("Symptoms of an asthma attack\n");
-        symptomsTitle.setSpan(new ForegroundColorSpan(titleColor),0,symptomsTitle.length(),0);
-        symptomsTitle.setSpan(new AbsoluteSizeSpan(75),0,symptomsTitle.length(),0);
-        symptomsTitle.setSpan(new StyleSpan(Typeface.BOLD),0,symptomsTitle.length(),0);
-        symptomsTitle.append("\nSigns that you may be having an asthma attack include:\n");
-        symptomsTitle.setSpan(new AbsoluteSizeSpan(60),28,symptomsTitle.length(),0);
-        symptomsTitle.setSpan(new ForegroundColorSpan(Color.BLACK),28,symptomsTitle.length(),0);
+        whatToDo_text = (TextView) findViewById(R.id.whatToDo_text);
+        whatToDo_text.setTypeface(lightFont);
+        whatToDo_text.setText("1. Sit up straight - try to keep calm.\n2. Take one puff of your "+
+                            "reliever inhaler (usually blue) once every 30 to 60 seconds up to "+
+                            "10 puffs.\n3. If you feel worse at any point, or you do not feel "+
+                            "better after 10 puffs, call 999 for an ambulance.\n4. If the ambulance "+
+                            "has not arrived after 10 minutes and your symptoms are not improving, "+
+                            " repeat step 2.\n5. If your symptoms are no better after repeating "+
+                            "step 2, and the ambulance has still not arrived, contact 999 again "+
+                            "immediately.");
 
-        SpannableStringBuilder symptomsBullets = new SpannableStringBuilder();
-        symptomsBullets.append("\n• Your symptoms are getting worse (cough, breathlessness, wheezing or tight chest)\n");
-        symptomsBullets.append("• Your reliever inhaler (usually blue) is not helping\n");
-        symptomsBullets.append("• You're too breathless to speak, eat or sleep\n");
-        symptomsBullets.append("• Your breathing is getting faster and it feels like you cannot catch your breath\n");
-        symptomsBullets.append("• Your peak flow score is lower than normal\n");
-        symptomsBullets.append("• Children may also complain of a tummy or chest ache\n\n");
-        symptomsBullets.setSpan(new AbsoluteSizeSpan(55),0,symptomsBullets.length(),0);
-        symptomsBullets.append("The symptoms will not necessarily occur suddenly. In fact, they often come on slowly over a few hours or days.\n");
-        symptomsBullets.setSpan(new AbsoluteSizeSpan(60),365,symptomsBullets.length(),0);
-        symptomsBullets.setSpan(new ForegroundColorSpan(Color.BLACK),365,symptomsBullets.length(),0);
+        whatToDo_info = (TextView) findViewById(R.id.whatToDo_info);
+        whatToDo_info.setTypeface(regularFont);
+        whatToDo_info.setText("\nNever be frightened of calling for help in an emergency.\n"+
+                            "\nTry to take the details of your medicines (or your personal "+
+                            "asthma action plan) with you to hospital if possible.\n"+
+                            "\nIf your symptoms improve and you do not need to call 999, get an "+
+                            "urgent same-day appointment to see a GP or asthma nurse.\n");
 
-        SpannableStringBuilder whatToDoTitle = new SpannableStringBuilder();
-        whatToDoTitle.append("\n\nWhat to do if you have an asthma attack\n");
-        whatToDoTitle.setSpan(new ForegroundColorSpan(titleColor),0,whatToDoTitle.length(),0);
-        whatToDoTitle.setSpan(new AbsoluteSizeSpan(75),0,whatToDoTitle.length(),0);
-        whatToDoTitle.setSpan(new StyleSpan(Typeface.BOLD),0,whatToDoTitle.length(),0);
+        call_999_title = (TextView) findViewById(R.id.call_999_title);
+        call_999_title.setTypeface(boldFont);
+        call_999_title.setText("Call 999 for an ambulance if:");
 
-        SpannableStringBuilder whatToDoText = new SpannableStringBuilder();
-        whatToDoText.append("\nIf you think you're having an asthma attack, you should:\n");
-        whatToDoText.setSpan(new AbsoluteSizeSpan(60),0,whatToDoText.length(),0);
-        whatToDoText.setSpan(new ForegroundColorSpan(Color.BLACK),0,whatToDoText.length(),0);
-        whatToDoText.append("\n1. Sit up straight – try to keep calm.\n");
-        whatToDoText.append("2. Take one puff of your reliever inhaler (usually blue) every 30 to 60 seconds up to 10 puffs.\n");
-        whatToDoText.append("3. If you feel worse at any point, or you do not feel better after 10 puffs, call 999 for an ambulance.\n");
-        whatToDoText.append("4. If the ambulance has not arrived after 10 minutes and your symptoms are not improving, repeat step 2.\n");
-        whatToDoText.append("5. If your symptoms are no better after repeating step 2, and the ambulance has still not arrived, contact 999 again immediately.\n");
-        whatToDoText.setSpan(new AbsoluteSizeSpan(55),61,whatToDoText.length(),0);
-        whatToDoText.append("\nNever be frightened of calling for help in an emergency.\n");
-        whatToDoText.append("\nTry to take the details of your medicines (or your personal asthma action plan) with you to hospital if possible.\n");
-        whatToDoText.append("\nIf your symptoms improve and you do not need to call 999, get an urgent same-day appointment to see a GP or asthma nurse.\n");
-        whatToDoText.setSpan(new AbsoluteSizeSpan(60),534,whatToDoText.length(),0);
-        whatToDoText.setSpan(new ForegroundColorSpan(Color.BLACK),534,whatToDoText.length(),0);
+        call_999_text = (TextView) findViewById(R.id.call_999_text);
+        call_999_text.setTypeface(lightFont);
+        call_999_text.setText("you're having an asthma attack and your symptoms don't improve after"+
+                                " ten puffs of your reliever inhaler, or if you feel worse at any point.");
 
-        SpannableStringBuilder nhsLink = new SpannableStringBuilder();
-        nhsLink.append("\n\nFor more information, please visit: https://www.nhs.uk/conditions/asthma/asthma-attack/\n");
-        nhsLink.setSpan(new AbsoluteSizeSpan(75),0,nhsLink.length(),0);
-        nhsLink.setSpan(new StyleSpan(Typeface.BOLD),0,nhsLink.length(),0);
-        ClickableSpan nhsLinkSpan = new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.nhs.uk/conditions/asthma/asthma-attack/"));
-                view.getContext().startActivity(intent);
-            }
-        };
-        nhsLink.setSpan(nhsLinkSpan,37,nhsLink.length(),0);
+        AE_info = (TextView) findViewById(R.id.AE_info);
+        AE_info.setTypeface(regularFont);
+        String AE_link = "\nFind out what to expect in A&E here: "+
+                "https://www.asthma.org.uk/advice/nhs-care/emergency-asthma-care/asthma-in-a-and-e/\n";
+        AE_info.setText(AE_link);
+        Linkify.addLinks(AE_info,Linkify.WEB_URLS);
 
-        SpannableStringBuilder emergency_info = new SpannableStringBuilder();
-        emergency_info.append(symptomsTitle);
-        emergency_info.append(symptomsBullets);
-        emergency_info.append(whatToDoTitle);
-        emergency_info.append(whatToDoText);
-        emergency_info.append(nhsLink);
+        call_111_title = (TextView) findViewById(R.id.call_111_title);
+        call_111_title.setTypeface(boldFont);
+        call_111_title.setText("Call 111 if:");
 
-        emergency_information_NHS_text.setMovementMethod(LinkMovementMethod.getInstance());
-        emergency_information_NHS_text.setText(emergency_info);
+        call_111_text = (TextView) findViewById(R.id.call_111_text);
+        call_111_text.setTypeface(lightFont);
+        call_111_text.setText("◉ your GP surgery is closed\n"+
+                                "◉ your symptoms are getting in the way of your everyday activities\n"+
+                                "◉ your symptoms are waking you up at night\n"+
+                                "◉ you're using your reliever inhaler three or more times a week.");
+
+        NHS111_info = (TextView) findViewById(R.id.NHS111_info);
+        NHS111_info.setTypeface(regularFont);
+        String NHS111_link = "\nThe NHS 111 service is available 24 hours a day, seven days a week: "+
+                "https://www.nhs.uk/using-the-nhs/nhs-services/urgent-and-emergency-care/nhs-111/\n";
+        NHS111_info.setText(NHS111_link);
+        Linkify.addLinks(NHS111_info,Linkify.WEB_URLS);
+
+        urgentSymptoms_title = (TextView) findViewById(R.id.urgentSymptoms_title);
+        urgentSymptoms_title.setTypeface(boldFont);
+        urgentSymptoms_title.setText("Ask for an urgent appointment with your GP or asthma nurse if:");
+
+        urgentSymptoms_text = (TextView) findViewById(R.id.urgentSymptoms_text);
+        urgentSymptoms_text.setTypeface(lightFont);
+        urgentSymptoms_text.setText("◉ your symptoms are coming back (wheeze, tightness in "+
+                                    "your chest, feeling breathless, cough)\n◉ you're waking "+
+                                    "up at night because of your asthma\n◉ your symptoms are "+
+                                    "getting in the way of your day-to-day routine (work, "+
+                                    "family life, exercising)\n◉ you're having symptoms, and "+
+                                    "using your reliever inhaler, three or more times a week.");
+
+        urgentSymptoms_info = (TextView) findViewById(R.id.urgentSymptoms_info);
+        urgentSymptoms_info.setTypeface(regularFont);
+        urgentSymptoms_info.setText("\nIf your GP or nurse has given you a specific phone "+
+                                    "number to call when you're concerned about asthma, continue "+
+                                    "to use that number.\n\nBut if you're finding it hard to "+
+                                    "breathe, or your reliever inhaler isn't helping, call 999.\n");
+
+        routine_title = (TextView) findViewById(R.id.routine_title);
+        routine_title.setTypeface(boldFont);
+        routine_title.setText("Book a routine appointment with your GP or asthma nurse if:");
+
+        routine_text = (TextView) findViewById(R.id.routine_text);
+        routine_text.setTypeface(lightFont);
+        routine_text.setText("◉ you're due an annual asthma review\n◉ you're worried about the "+
+                            "side effects of your medicines, or medicines not working as well\n"+
+                            "◉ you need health advice - for example, information about giving "+
+                            "up smoking\n◉ you've just come out of hospital after an asthma "+
+                            "attack - book an appointment within two days.");
+
+        reference_text = (TextView) findViewById(R.id.reference_text);
+        reference_text.setTypeface(boldFont);
+        String reference_links = "\nSources: \n"+
+                "https://www.asthma.org.uk/advice/manage-your-asthma/when-to-go-to-hospital\n"+
+                "https://www.nhs.uk/conditions/asthma/asthma-attack/\n";
+        reference_text.setText(reference_links);
+        Linkify.addLinks(reference_text,Linkify.WEB_URLS);
+
     }
 
 
