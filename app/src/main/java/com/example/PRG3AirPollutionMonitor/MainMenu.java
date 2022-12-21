@@ -7,12 +7,9 @@ import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,12 +18,12 @@ import java.util.Locale;
 public class MainMenu extends AppCompatActivity {
 
     // define the global variable
-    TextView question1;
+    TextView welcomeTitle;
     // Add button Move to Activity
-    Button next_Activity_button;
-    Button emergency_button;
-    Button inhaler_button;
-    Button countdown_button;
+    Button airQualityButton;
+    Button emergencyButton;
+    Button inhalerButton;
+    Button countdownButton;
 
     //define variables needed for the countdown button
 
@@ -61,21 +58,21 @@ public class MainMenu extends AppCompatActivity {
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
-        next_Activity_button = (Button) findViewById(R.id.first_activity_button);
-        emergency_button = (Button) findViewById(R.id.emergency);
-        inhaler_button = (Button) findViewById(R.id.inhaler_menu);
-        countdown_button = (Button) findViewById(R.id.countdown_timer);
-        question1 = (TextView) findViewById(R.id.question1_id);
+        airQualityButton = (Button) findViewById(R.id.air_quality_button);
+        emergencyButton = (Button) findViewById(R.id.emergency_button);
+        inhalerButton = (Button) findViewById(R.id.inhaler_button);
+        countdownButton = (Button) findViewById(R.id.countdown_button);
+        welcomeTitle = (TextView) findViewById(R.id.welcome_title);
 
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
 
         Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-        question1.setTypeface(customFont);
-        question1.setText("Welcome\n");
+        welcomeTitle.setTypeface(customFont);
+        welcomeTitle.setText("Welcome\n");
 
         // Add_button add clicklistener
-        next_Activity_button.setOnClickListener(v -> {
+        airQualityButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, AirQuality.class);
@@ -83,7 +80,7 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        emergency_button.setOnClickListener(v -> {
+        emergencyButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, Emergency.class);
@@ -91,7 +88,7 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        inhaler_button.setOnClickListener(v -> {
+        inhalerButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, InhalerMenu.class);
@@ -99,7 +96,7 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
         context = this;
-        countdown_button.setOnClickListener(v -> {
+        countdownButton.setOnClickListener(v -> {
 //            try {
 //                System.out.println(PrescriptionDetails.text3);
 //                start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
@@ -173,7 +170,7 @@ public class MainMenu extends AppCompatActivity {
         //shows app that the timer is not running
         timer_running = false;
         //resets text on timer
-        countdown_button.setText("log inhaler use");
+        countdownButton.setText("log inhaler use");
         //resets time of timer
         time_left_ms = start_time_ms;
     }
@@ -185,7 +182,7 @@ public class MainMenu extends AppCompatActivity {
         //formats time for display
         String time_left_formatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
         //sets text on timer to time left
-        countdown_button.setText(time_left_formatted);
+        countdownButton.setText(time_left_formatted);
     }
     public static void saveVar(Context context){
         SharedPreferences pref = context.getSharedPreferences("pref",MODE_PRIVATE);
