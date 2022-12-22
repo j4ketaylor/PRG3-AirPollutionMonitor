@@ -67,10 +67,6 @@ public class MainMenu extends AppCompatActivity {
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
 
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-        welcomeTitle.setTypeface(customFont);
-        welcomeTitle.setText("Welcome\n");
-
         // Add_button add clicklistener
         airQualityButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining

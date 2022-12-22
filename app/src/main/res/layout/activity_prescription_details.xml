@@ -1,117 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".PrescriptionDetails"
     tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/prescrption_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/check_prescription_title"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/remaining_inhaler_uses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="1dp"
         android:text=""
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remaining_inhaler_uses_display_text" />
+
 
     <TextView
         android:id="@+id/new_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="300dp"
-        android:text=""
-        android:textStyle="bold" />
-
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/new_prescription_information_text"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prescription_expiration_date" />
 
     <TextView
         android:id="@+id/remaining_inhaler_uses_display_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:text=""
-        android:textStyle="bold" />
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/remaining_inhaler_uses_display_text"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prescrption_details_title" />
 
     <TextView
         android:id="@+id/prescription_expiration_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="1dp"
         android:text=""
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prescription_expiration_date_display_text" />
 
     <TextView
         android:id="@+id/prescription_expiration_date_display_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="90dp"
-        android:text=""
-        android:textStyle="bold" />
-
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/prescription_expiry_date_display_text"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remaining_inhaler_uses" />
 
     <EditText
         android:id="@+id/new_prescription_number_of_uses_input"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
         android:ems="10"
-        android:hint="Number of uses"
-        android:inputType="number" />
+        android:hint="@string/no_of_uses_prescription_hint"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_information" />
 
     <EditText
         android:id="@+id/new_prescription_expiry_date_input"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Expiry date (DD/MM/YYYY)"
-        android:inputType="date" />
+        android:hint="@string/expiry_date_prescription_hint"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_prescription_number_of_uses_input" />
 
     <EditText
         android:id="@+id/new_prescription_dosage_interval_input"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="Dosage interval (minutes)"
-        android:inputType="date" />
+        android:hint="@string/dosage_interval_prescription_hint"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_prescription_expiry_date_input" />
 
 
     <!--    <Button-->
-<!--        android:id="@+id/apply_text_button"-->
-<!--        android:layout_width="250dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="500dp"-->
-<!--        android:backgroundTint="#68BBE3"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:text="Apply Prescription"-->
-<!--        android:textColor="@android:color/background_light" />-->
+    <!--        android:id="@+id/apply_text_button"-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="500dp"-->
+    <!--        android:backgroundTint="#68BBE3"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:text="Apply Prescription"-->
+    <!--        android:textColor="@android:color/background_light" />-->
 
     <Button
         android:id="@+id/save_text_button"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="563dp"
-        android:backgroundTint="#0E86D4"
-        android:layout_centerHorizontal="true"
-        android:text="Save"
-        android:textColor="@android:color/background_light" />
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/pacific_blue2"
+        android:text="@string/save_button_text"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_prescription_dosage_interval_input" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

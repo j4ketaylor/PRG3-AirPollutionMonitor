@@ -12,9 +12,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="60dp"
-        android:text=""
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:text="@string/air_quality_title"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"/>
 
     <Button
         android:id="@+id/live_london_pollution_levels"
@@ -23,10 +24,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="200dp"
-        android:backgroundTint="#68BBE3"
-        android:text="Live Pollution levels"
+        android:backgroundTint="@color/malibu_blue1"
+        android:text="@string/live_air_pollution_title"
         android:textColor="@android:color/background_light"
-        android:textSize="15sp"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"
         android:textStyle="bold" />
 
     <Button
@@ -36,9 +38,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="300dp"
-        android:backgroundTint="#0E86D4"
-        android:text="Air Quality History"
-        android:textSize="15sp"
+        android:backgroundTint="@color/pacific_blue2"
+        android:text="@string/air_quality_plot_title"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"
         android:textStyle="bold" />
 
     <Button
@@ -48,9 +51,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="400dp"
-        android:backgroundTint="#055C9D"
-        android:text="News Updates"
-        android:textSize="15sp"
+        android:backgroundTint="@color/cobalt_blue3"
+        android:text="@string/news_updates_title"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"
         android:textStyle="bold" />
 
     <Button
@@ -59,10 +63,11 @@
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="500dp"
-        android:text="List of all London Areas"
+        android:text="@string/sorted_areas_title"
         android:textColor="@android:color/background_light"
-        android:backgroundTint="#003060"
-        android:textSize="15sp"
+        android:backgroundTint="@color/prussian_blue4"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"
         android:textStyle="bold"/>
 
 </RelativeLayout>

@@ -11,7 +11,8 @@
         android:layout_marginStart="20dp"
         android:id="@+id/calEventCell"
         android:textSize="20sp"
-        android:textColor="#003060"
+        android:textColor="@color/prussian_blue4"
+        android:fontFamily="@font/roboto_medium"
         android:text="Event"/>
 
 </LinearLayout>

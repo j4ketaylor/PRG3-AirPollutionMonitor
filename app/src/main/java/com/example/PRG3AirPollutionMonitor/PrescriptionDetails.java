@@ -50,10 +50,6 @@ public class PrescriptionDetails extends AppCompatActivity {
         new_information_text = (TextView) findViewById(R.id.new_information);
         save_button = (Button) findViewById(R.id.save_text_button);
 
-        prescription_expiry_date_display.setText("Expiry Date: \n");
-        remaining_inhaler_uses_display.setText("Number of uses: \n");
-        new_information_text.setText("Enter new information:\n");
-
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

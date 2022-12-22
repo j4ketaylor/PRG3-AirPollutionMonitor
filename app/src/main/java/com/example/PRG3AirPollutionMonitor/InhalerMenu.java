@@ -26,11 +26,6 @@ public class InhalerMenu extends AppCompatActivity {
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
 
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-        inhaler_menu_text_view.setTypeface(customFont);
-        inhaler_menu_text_view.setText("Inhaler Use\n");
-
-
         check_calendar_button.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
