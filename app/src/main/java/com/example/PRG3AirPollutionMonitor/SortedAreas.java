@@ -18,41 +18,12 @@ public class SortedAreas extends AppCompatActivity {
     static String all_areas;
     static String all_numbers;
 
-
     String[] items = {
-            "Barking and Dagenham",
-            "Barnet",
-            "Bexley",
-            "Brent",
-            "Bromley",
-            "Camden",
-            "City of London",
-            "Croydon",
-            "Ealing",
-            "Enfield",
-            "Greenwich",
-            "Hackney",
-            "Hammershith and Fulham",
-            "Haringey",
-            "Harrow",
-            "Havering",
-            "Hillingdon",
-            "Hounslow",
-            "Islington",
-            "Kensington and Chelsea",
-            "Kingston",
-            "Lambeth",
-            "Lewisham",
-            "Merton",
-            "Newham",
-            "Redbridge",
-            "Richmond",
-            "Southwark",
-            "Sutton",
-            "Tower Hamlets",
-            "Waltham Forest",
-            "Wandsworth",
-            "Westminster"
+            "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "City of London", "Croydon",
+            "Ealing", "Enfield", "Greenwich", "Hackney", "Hammersmith and Fulham", "Haringey", "Harrow", "Havering",
+            "Hillingdon", "Hounslow", "Islington", "Kensington and Chelsea", "Kingston", "Lambeth", "Lewisham",
+            "Merton", "Newham", "Redbridge", "Richmond", "Southwark", "Sutton", "Tower Hamlets", "Waltham Forest",
+            "Wandsworth", "Westminster"
     };
 
     @Override
@@ -77,20 +48,20 @@ public class SortedAreas extends AppCompatActivity {
                     for (int i = 0; i < 33; i++) {
                         System.out.println(i);
                         x = items[i].toLowerCase().replaceAll("\\s+", "");
-                        String y;
                         String data = "";
                         getAQI getInformation = new getAQI(x, data);
-                        y = getInformation.AQIOutput();
-                        if (Integer.parseInt(y) == 0) {
-                            y = "No Info";
+                        String[] y = getInformation.AQIOutput();
+                        System.out.println(y[1]);
+                        if (Integer.parseInt(y[1]) == 0) {
+                            y[1] = "No Info";
                         } else {
-                            if (Integer.parseInt(y) <= 1) {
-                                y = "\uD83D\uDFE2";
+                            if (Integer.parseInt(y[1]) <= 3) {
+                                y[1] = "\uD83D\uDFE2";
                             } else {
-                                y = "\uD83D\uDFE0";
+                                y[1] = "\uD83D\uDFE0";
                             }
                         }
-                        values.put(x, y);
+                        values.put(x, y[1]);
                         System.out.println(values.get(x));
                         all_areas = all_areas + items[i] + "\n";
                         all_numbers = all_numbers + values.get(x) + "\n";
@@ -101,16 +72,11 @@ public class SortedAreas extends AppCompatActivity {
                                 numbers_of_areas_text.setText(all_numbers);
                             }
                         });
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
             }
-
         });
         thread.start();
     }

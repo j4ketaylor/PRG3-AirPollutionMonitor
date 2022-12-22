@@ -24,7 +24,7 @@ public class getAQI {
         this.data = data;
     }
 
-    public String AQIOutput() {
+    public String[] AQIOutput() {
         try {
 
             List<String> species_list = Arrays.asList(
@@ -142,7 +142,7 @@ public class getAQI {
 
 
             String asthma_index_color;
-            if (asthma_index <= 1) {
+            if (asthma_index <= 2) {
                 colour_list.put("Asthma Index","\uD83D\uDFE2");
 //            } else if (asthma_index <= 2) {
 //                colour_list.put("Asthma Index","\uD83D\uDFE0");
@@ -150,16 +150,13 @@ public class getAQI {
                 colour_list.put("Asthma Index","\uD83D\uDFE0");
             }
 
-            return asthma_index.toString();
-
-//            return(
-//                    "Carbon Monoxide:   " + air_pollution_ratings.get("Carbon Monoxide") + " " + colour_list.get("Carbon Monoxide") +"\n" +
-//                            "Nitrogen Dioxide:     " + air_pollution_ratings.get("Nitrogen Dioxide") + " " + colour_list.get("Nitrogen Dioxide") +"\n" +
-//                            "Ozone:                        " + air_pollution_ratings.get("Ozone") + " " + colour_list.get("Ozone") +"\n" +
-//                            "PM10 Particulate:    " + air_pollution_ratings.get("PM10 Particulate") + " " + colour_list.get("PM10 Particulate") +"\n" +
-//                            "PM2.5 Particulate:   " + air_pollution_ratings.get("PM2.5 Particulate") + " " + colour_list.get("PM2.5 Particulate") +"\n" +
-//                            "Sulphur Dioxide:       " + air_pollution_ratings.get("Sulphur Dioxide") + " " + colour_list.get("Sulphur Dioxide") +"\n\n" +
-//                            "Asthma Index:           " + asthma_index + " " + colour_list.get("Asthma Index") + "\n" + myObject.toString());
+            return new String[] {("Carbon Monoxide:   " + air_pollution_ratings.get("Carbon Monoxide") + " " + colour_list.get("Carbon Monoxide") +"\n" +
+                            "Nitrogen Dioxide:     " + air_pollution_ratings.get("Nitrogen Dioxide") + " " + colour_list.get("Nitrogen Dioxide") +"\n" +
+                            "Ozone:                        " + air_pollution_ratings.get("Ozone") + " " + colour_list.get("Ozone") +"\n" +
+                            "PM10 Particulate:    " + air_pollution_ratings.get("PM10 Particulate") + " " + colour_list.get("PM10 Particulate") +"\n" +
+                            "PM2.5 Particulate:   " + air_pollution_ratings.get("PM2.5 Particulate") + " " + colour_list.get("PM2.5 Particulate") +"\n" +
+                            "Sulphur Dioxide:       " + air_pollution_ratings.get("Sulphur Dioxide") + " " + colour_list.get("Sulphur Dioxide") +"\n\n" +
+                            "Asthma Index:           " + asthma_index + " " + colour_list.get("Asthma Index") + "\n").toString(), asthma_index.toString()};
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -169,7 +166,7 @@ public class getAQI {
             e.printStackTrace();
         }
 
-        return "0";
+        return new String[]{"0","0"};
 
     }
 }
