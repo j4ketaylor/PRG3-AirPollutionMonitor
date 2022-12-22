@@ -96,12 +96,9 @@ public class PrescriptionDetails extends AppCompatActivity {
 
         try {
             Integer userUses = Integer.valueOf(text);
-            Integer expiryDate = Integer.valueOf(text2);
+            //Integer expiryDate = Integer.valueOf(text2);
             Integer inhalerUses = userUses - MainMenu.inhaler_count;
 
-            if (inhalerUses <= 0) {
-                prescription_notify();
-            }
 
             remaining_inhaler_uses_text.setText(inhalerUses.toString());
             prescription_expiry_date_text.setText(text2);
@@ -112,6 +109,10 @@ public class PrescriptionDetails extends AppCompatActivity {
             editor.putString(TEXT, inhalerUses.toString());
             editor.apply();
             MainMenu.inhaler_count = 0;
+            if (inhalerUses <= 0) {
+                prescription_notify();
+            }
+
         } catch (NumberFormatException e) {
             System.out.println("Error");
         }
