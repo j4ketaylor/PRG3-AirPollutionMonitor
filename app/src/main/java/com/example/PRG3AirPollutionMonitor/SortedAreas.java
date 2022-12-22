@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import java.util.HashMap;
 
 public class SortedAreas extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class SortedAreas extends AppCompatActivity {
         setContentView(R.layout.activity_sorted_areas);
 
         sorted_areas_text = (TextView) findViewById(R.id.sorted_areas);
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
+        Typeface customFont = Typeface.createFromAsset(getAssets(), "font/roboto_medium.ttf");
         sorted_areas_text.setTypeface(customFont);
         sorted_areas_text.setText("London Air Quality\n");
 

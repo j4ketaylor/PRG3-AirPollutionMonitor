@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Daily Calendar"
+        android:text="@string/daily_calendar_title"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:layout_marginStart="20dp"
             android:onClick="previousWeek"
             android:text="◀"
-            android:backgroundTint="#68BBE3"
+            android:backgroundTint="@color/malibu_blue1"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -43,7 +44,7 @@
             android:layout_weight="2"
             android:text="November 2021"
             android:textAlignment="center"
-            android:textColor="#003060"
+            android:textColor="@color/prussian_blue4"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -55,7 +56,7 @@
             android:background="@null"
             android:onClick="nextWeek"
             android:text="▶"
-            android:backgroundTint="#68BBE3"
+            android:backgroundTint="@color/malibu_blue1"
             android:textColor="@android:color/background_light"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -70,64 +71,71 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MON"
+            android:text="@string/monday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TUE"
+            android:text="@string/tuesday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WED"
+            android:text="@string/wednesday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="THU"
+            android:text="@string/thursday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FRI"
+            android:text="@string/friday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAT"
+            android:text="@string/saturday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
+            android:text="@string/sunday_title"
             android:textAlignment="center"
             android:textColor="@color/teal_700"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium" />
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -141,12 +149,13 @@
         android:layout_height="60dp"
         android:background="@null"
         android:onClick="newCALEvent"
-        android:text="Record Inhaler Use"
-        android:backgroundTint="#68BBE3"
+        android:text="@string/cal_edit_event_title"
+        android:backgroundTint="@color/malibu_blue1"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
         android:layout_gravity="center"
         android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
         />
     
     <ListView

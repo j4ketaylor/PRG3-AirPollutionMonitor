@@ -23,10 +23,6 @@ public class AirQuality extends AppCompatActivity {
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
 
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf");
-        air_quality_text_view.setTypeface(customFont);
-        air_quality_text_view.setText("Air Quality\n");
-
         recommended_places_to_live_button = (Button) findViewById(R.id.recommended_places_to_live);
         live_london_pollution_levels_button = (Button) findViewById(R.id.live_london_pollution_levels);
         news_updates_button = (Button) findViewById(R.id.news_updates);

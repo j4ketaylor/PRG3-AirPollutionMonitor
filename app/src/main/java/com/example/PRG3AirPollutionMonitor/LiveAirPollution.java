@@ -39,7 +39,6 @@ public class LiveAirPollution extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         location_live_viewer = findViewById(R.id.location_live_viewer_text);
-        location_live_viewer.setText("Select a location:");
         air_pollution_rating_viewer = findViewById(R.id.air_pollution_rating_viewer_text);
 
         autoCompleteTxt = findViewById(R.id.auto_complete_txt);
