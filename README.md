@@ -2,6 +2,13 @@
 
 This is a Programming 3 Group Project titled "Air Pollution Monitor and Logging for Asthma Sufferers".
 
+The group members are:
+- Jey Tse Loh
+- Jacob Taylor
+- Elliott Wong
+- Jikai Wu
+- Garfield Zhang
+
 Air pollution is a significant danger to people with asthma, and living in an area that has low pollution can change their life experience. 
 
 This project has several goals. To make an app that:- 
