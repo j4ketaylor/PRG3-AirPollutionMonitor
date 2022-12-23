@@ -12,11 +12,11 @@ This project has several goals. To make an app that:-
 
 3. To provide information about different areas of London:- 
 
-  a. to warn of high air pollution levels in the user's area,  
+  a. To warn of high air pollution levels in the user's area,  
 
-  b. to warn them about other areas that they should try and avoid 
+  b. To warn them about other areas that they should try and avoid 
 
-  c. to try and identify the best places to live in London from the local authority's objectives, and by plotting the actual pollution history of the different sites within that local authority 
+  c. To try and identify the best places to live in London from the local authority's objectives, and by plotting the actual pollution history of the different sites within that local authority 
 
   d. To provide pollution news updates 
 
