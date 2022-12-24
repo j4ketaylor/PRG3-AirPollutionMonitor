@@ -1,6 +1,7 @@
 package com.example.PRG3AirPollutionMonitor;
 
-import android.content.Intent;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class PrescriptionDetails extends AppCompatActivity {
     private TextView remaining_inhaler_uses_text;
@@ -33,7 +36,6 @@ public class PrescriptionDetails extends AppCompatActivity {
     private String text;
     private String text2;
     public static String text3;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,10 @@ public class PrescriptionDetails extends AppCompatActivity {
             }
         });
 
+        createNotificationChannel();
         loadData();
         updateViews();
+
 
     }
 
@@ -88,7 +92,10 @@ public class PrescriptionDetails extends AppCompatActivity {
 
         try {
             Integer userUses = Integer.valueOf(text);
+            //Integer expiryDate = Integer.valueOf(text2);
             Integer inhalerUses = userUses - MainMenu.inhaler_count;
+
+
             remaining_inhaler_uses_text.setText(inhalerUses.toString());
             prescription_expiry_date_text.setText(text2);
 
@@ -98,13 +105,42 @@ public class PrescriptionDetails extends AppCompatActivity {
             editor.putString(TEXT, inhalerUses.toString());
             editor.apply();
             MainMenu.inhaler_count = 0;
-        } catch(NumberFormatException e) {
+            if (inhalerUses <= 0) {
+                prescription_notify();
+            }
+
+        } catch (NumberFormatException e) {
             System.out.println("Error");
         }
+
     }
+
+
     @Override
     protected void onStop(){
         super.onStop();
         MainMenu.saveVar(this);
     }
+
+
+    public void prescription_notify(){
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(PrescriptionDetails.this,"Prescription Notification");
+            builder.setSmallIcon(R.drawable.ic_android_black_24dp);
+            builder.setContentTitle("Inhaler is low!");
+            builder.setContentText("Please make sure you have a replacement!");
+            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            builder.setAutoCancel(true);
+
+            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(PrescriptionDetails.this);
+            managerCompat.notify(1,builder.build());
+
+    }
+    private void createNotificationChannel(){
+        NotificationChannel channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(channel);
+    }
+
+
 }
+
