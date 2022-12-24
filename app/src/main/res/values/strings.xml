@@ -35,4 +35,6 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="record_use_button_text">Record Use</string>
+    <string name="inhaler_overdose_message">Warning! Inhaler Overdosed</string>
+    <string name="inhaler_use_recorded_message">Inhaler Use Recorded</string>
 </resources>

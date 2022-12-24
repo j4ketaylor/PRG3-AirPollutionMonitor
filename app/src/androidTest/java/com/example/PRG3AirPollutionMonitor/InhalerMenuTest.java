@@ -1,6 +1,7 @@
 package com.example.PRG3AirPollutionMonitor;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -62,4 +63,5 @@ public class InhalerMenuTest {
         onView(withId(R.id.check_prescription_details)).perform(click());
         onView(withId(R.id.prescription_details_page)).check(matches(isDisplayed()));
     }
+
 }

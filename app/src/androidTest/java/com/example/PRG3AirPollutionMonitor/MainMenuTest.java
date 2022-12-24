@@ -1,6 +1,7 @@
 package com.example.PRG3AirPollutionMonitor;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -59,6 +60,9 @@ public class MainMenuTest {
 
         onView(withId(R.id.air_quality_button)).perform(click());
         onView(withId(R.id.air_quality_menu)).check(matches(isDisplayed()));
+
+        pressBack();
+        onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -68,6 +72,9 @@ public class MainMenuTest {
 
         onView(withId(R.id.emergency_button)).perform(click());
         onView(withId(R.id.emergency_info_page)).check(matches(isDisplayed()));
+
+        pressBack();
+        onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -77,6 +84,9 @@ public class MainMenuTest {
 
         onView(withId(R.id.inhaler_button)).perform(click());
         onView(withId(R.id.inhaler_use_menu)).check(matches(isDisplayed()));
+
+        pressBack();
+        onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
 }
