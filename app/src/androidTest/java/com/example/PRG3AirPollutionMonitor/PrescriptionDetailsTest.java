@@ -67,7 +67,40 @@ public class PrescriptionDetailsTest {
         assertEquals(savedDosageInterval,"2");
     }
 
-//    @Test
-//    public void test_invalidInput() {
-//    }
+    @Test
+    public void test_invalidInput_negativeNumOfUses() {
+        // Enter -1 into 'Number of uses' input
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("-1"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+    }
+
+    @Test
+    public void test_invalidInput_zeroNumOfUses() {
+        // Enter 0 into 'Number of uses' input
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("0"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+    }
+
+    @Test
+    public void test_invalidInput_decimalNumOfUses() {
+        // Enter 1.5 into 'Number of uses' input
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("1.5"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+    }
+
+    @Test
+    public void test_invalidInput_dayMonthExpiryDate() {
+    }
+
+    @Test
+    public void test_invalidInput_negativeDosageInterval() {
+    }
+
+    @Test
+    public void test_invalidInput_zeroDosageInterval() {
+    }
+
+    @Test
+    public void test_invalidInput_decimalDosageInterval() {
+    }
 }
