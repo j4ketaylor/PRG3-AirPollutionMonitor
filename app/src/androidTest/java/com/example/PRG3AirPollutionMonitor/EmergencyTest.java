@@ -30,19 +30,27 @@ public class EmergencyTest {
         ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
 
         onView(withId(R.id.emergency_information)).check(matches(isDisplayed()));
-//        onView(withId(R.id.whatToDo_cardview)).check(matches(isDisplayed()));
-//        onView(withId(R.id.whatToDo_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.call_999_cardview)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.whatToDo_info)).check(matches(isDisplayed()));
 //        onView(withId(R.id.AE_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.call_111_cardview)).check(matches(isDisplayed()));
 //        onView(withId(R.id.NHS111_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.urgentSymptoms_cardview)).check(matches(isDisplayed()));
 //        onView(withId(R.id.urgentSymptoms_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.routine_cardview)).check(matches(isDisplayed()));
 //        onView(withId(R.id.reference_text)).check(matches(isDisplayed()));
     }
 
-//    @Test
+    @Test
+    public void test_visibility_cardViews() {
+        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
+        ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
+
+        onView(withId(R.id.whatToDo_cardview)).check(matches(isDisplayed()));
+//        onView(withId(R.id.call_999_cardview)).check(matches(isDisplayed()));
+//        onView(withId(R.id.call_111_cardview)).check(matches(isDisplayed()));
+//        onView(withId(R.id.urgentSymptoms_cardview)).check(matches(isDisplayed()));
+//        onView(withId(R.id.routine_cardview)).check(matches(isDisplayed()));
+    }
+
+    //    @Test
 //    public void test_isTitleAndTextViewTextDisplayed() {
 //        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
 //        ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
