@@ -37,6 +37,8 @@ public class PrescriptionDetails extends AppCompatActivity {
     private String text2;
     public static String text3;
 
+    private int InhalerUsesnot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +69,7 @@ public class PrescriptionDetails extends AppCompatActivity {
             }
         });
 
-        createNotificationChannel();
+
         loadData();
         updateViews();
 
@@ -96,11 +98,13 @@ public class PrescriptionDetails extends AppCompatActivity {
 
         try {
             Integer userUses = Integer.valueOf(text);
+
             //Integer expiryDate = Integer.valueOf(text2);
             Integer inhalerUses = userUses - MainMenu.inhaler_count;
-
+            this.InhalerUsesnot = inhalerUses;
 
             remaining_inhaler_uses_text.setText(inhalerUses.toString());
+
             prescription_expiry_date_text.setText(text2);
 
             SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -109,9 +113,6 @@ public class PrescriptionDetails extends AppCompatActivity {
             editor.putString(TEXT, inhalerUses.toString());
             editor.apply();
             MainMenu.inhaler_count = 0;
-            if (inhalerUses <= 0) {
-                prescription_notify();
-            }
 
         } catch (NumberFormatException e) {
             System.out.println("Error");
@@ -126,25 +127,9 @@ public class PrescriptionDetails extends AppCompatActivity {
         MainMenu.saveVar(this);
     }
 
-
-    public void prescription_notify(){
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(PrescriptionDetails.this,"Prescription Notification");
-            builder.setSmallIcon(R.drawable.ic_android_black_24dp);
-            builder.setContentTitle("Inhaler is low!");
-            builder.setContentText("Please make sure you have a replacement!");
-            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            builder.setAutoCancel(true);
-
-            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(PrescriptionDetails.this);
-            managerCompat.notify(1,builder.build());
-
+    public int getInhalerUsesnot(){
+        return this.InhalerUsesnot;
     }
-    private void createNotificationChannel(){
-        NotificationChannel channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(channel);
-    }
-
 
 }
 
