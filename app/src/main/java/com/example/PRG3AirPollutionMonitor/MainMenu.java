@@ -115,6 +115,7 @@ public class MainMenu extends AppCompatActivity {
 //            }
             time = LocalTime.now();
             date = LocalDate.now();
+            prescription_notification();
             inhaler_count++;
             //if timer is already running, show a popup indicating overdose and log overdose on calendar
             if (timer_running){
@@ -138,7 +139,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         createNotificationChannel();
-        prescription_notification();
+
 
 
 
