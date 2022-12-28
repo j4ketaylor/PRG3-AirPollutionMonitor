@@ -1,5 +1,7 @@
 package com.example.PRG3AirPollutionMonitor;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.ArrayList;
 
@@ -44,10 +48,16 @@ public class MainMenu extends AppCompatActivity {
     CALDBHelper XCALDBHelper;
 
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
 //        try {
 //            System.out.println(PrescriptionDetails.text3);
@@ -126,6 +136,12 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+
+        createNotificationChannel();
+        prescription_notification();
+
+
+
     }
     //starts the timer
     private void startTimer(){
@@ -237,5 +253,31 @@ public class MainMenu extends AppCompatActivity {
                 startTimer();
             }
         }
+    }
+
+    public void prescription_notification(){
+        PrescriptionDetails prescri_details = new PrescriptionDetails();
+        int inhaler_uses = prescri_details.getInhalerUsesnot();
+        if (inhaler_uses == 0){
+            prescription_notify();
+        }
+    }
+
+    public void prescription_notify(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
+        builder.setSmallIcon(R.drawable.ic_android_black_24dp);
+        builder.setContentTitle("Inhaler is low!");
+        builder.setContentText("Please make sure you have a replacement!");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
+        managerCompat.notify(1,builder.build());
+
+    }
+    public void createNotificationChannel(){
+        NotificationChannel prescrip_channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(prescrip_channel);
     }
 }
