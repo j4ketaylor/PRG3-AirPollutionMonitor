@@ -8,11 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 
 public class PrescriptionDetails extends AppCompatActivity {
     private TextView remaining_inhaler_uses_text;
@@ -24,6 +33,42 @@ public class PrescriptionDetails extends AppCompatActivity {
     private EditText new_prescription_expiry_date;
     private EditText new_prescription_dosage_interval;
     private String dosage_interval;
+
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter [] inputFormatters = {
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("dd.MM.yyyy"),
+            DateTimeFormatter.ofPattern("dd MM yyyy"),
+            DateTimeFormatter.ofPattern("ddMMyyyy"),
+            DateTimeFormatter.ofPattern("ddMMyy"),
+            DateTimeFormatter.ofPattern("dd/MM/yy"),
+            DateTimeFormatter.ofPattern("dd-MM-yy"),
+            DateTimeFormatter.ofPattern("dd.MM.yy"),
+            DateTimeFormatter.ofPattern("dd MM yy"),
+            DateTimeFormatter.ofPattern("yyyy/MM/dd"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("yyyy.MM.dd"),
+            DateTimeFormatter.ofPattern("yyyy MM dd"),
+            DateTimeFormatter.ofPattern("yyyyMMdd"),
+            DateTimeFormatter.ofPattern("yy/MM/dd"),
+            DateTimeFormatter.ofPattern("yy-MM-dd"),
+            DateTimeFormatter.ofPattern("yy.MM.dd"),
+            DateTimeFormatter.ofPattern("yy MM dd"),
+            DateTimeFormatter.ofPattern("yyMMdd"),
+            DateTimeFormatter.ofPattern("MM/dd/yyyy"),
+            DateTimeFormatter.ofPattern("MM-dd-yyyy"),
+            DateTimeFormatter.ofPattern("MM.dd.yyyy"),
+            DateTimeFormatter.ofPattern("MM dd yyyy"),
+            DateTimeFormatter.ofPattern("MMddyyyy"),
+            DateTimeFormatter.ofPattern("MM/dd/yy"),
+            DateTimeFormatter.ofPattern("MM-dd-yy"),
+            DateTimeFormatter.ofPattern("MM.dd.yy"),
+            DateTimeFormatter.ofPattern("MM dd yy"),
+            DateTimeFormatter.ofPattern("MMddyy"),
+    };
+
+    LocalDate dateNow = LocalDate.now();
 
     private Button save_button;
 
@@ -57,17 +102,43 @@ public class PrescriptionDetails extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                remaining_inhaler_uses_text.setText(new_prescription_number_of_uses.getText().toString());
-                prescription_expiry_date_text.setText(new_prescription_expiry_date.getText().toString());
-                dosage_interval = new_prescription_dosage_interval.getText().toString();
-                saveData();
-                loadData();
-            }
+                LocalDate enteredDate = null;
+                for (DateTimeFormatter formatter : inputFormatters) {
+                    try {
+                        enteredDate = LocalDate.parse(new_prescription_expiry_date.getText().toString(), formatter);
+                        break;
+                    } catch (DateTimeParseException e) {
+                        // Ignore
+                    }
+                }
+                if (enteredDate == null) {
+                    Toast.makeText(PrescriptionDetails.this, "Error: Invalid Date Format", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (enteredDate.isAfter(dateNow)) {
+                        if (Float.parseFloat(new_prescription_number_of_uses.getText().toString()) > 0) {
+                            if (Float.parseFloat(new_prescription_dosage_interval.getText().toString()) > 0) {
+                                remaining_inhaler_uses_text.setText(new_prescription_number_of_uses.getText().toString());
+                                prescription_expiry_date_text.setText(enteredDate.format(dateFormatter));
+                                dosage_interval = new_prescription_dosage_interval.getText().toString();
+                                saveData();
+                                Toast.makeText(PrescriptionDetails.this, "Prescription Saved", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(PrescriptionDetails.this, "Error: Invalid Dosage Interval", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(PrescriptionDetails.this, "Error: Invalid Number of Uses", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(PrescriptionDetails.this, "Error: Invalid Expiry Date", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                }
+
         });
-
-
         loadData();
         updateViews();
+
 
 
     }
