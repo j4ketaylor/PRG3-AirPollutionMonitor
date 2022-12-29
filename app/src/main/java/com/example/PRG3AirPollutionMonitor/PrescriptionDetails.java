@@ -168,6 +168,7 @@ public class PrescriptionDetails extends AppCompatActivity {
 
             //Integer expiryDate = Integer.valueOf(text2);
             Integer inhalerUses = userUses - MainMenu.inhaler_count;
+
             this.InhalerUsesnot = inhalerUses;
 
             remaining_inhaler_uses_text.setText(inhalerUses.toString());
