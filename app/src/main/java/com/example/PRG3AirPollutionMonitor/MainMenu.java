@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -137,15 +138,30 @@ public class MainMenu extends AppCompatActivity {
                 CALEvent newCALEvent = new CALEvent(eventName, date, time);
                 CALEvent.eventsList.add(newCALEvent);
                 boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
-
             }
         });
+
 
         createNotificationChannel();
         prescription_notification();
 
 
 
+
+
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            Intent intent = new Intent(MainMenu.this, PollutionPopup.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return false;
+        }
     }
     //starts the timer
     private void startTimer(){
