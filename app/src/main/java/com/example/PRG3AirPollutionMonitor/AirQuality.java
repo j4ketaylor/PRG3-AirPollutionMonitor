@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AirQuality extends AppCompatActivity {
 
-    Button recommended_places_to_live_button,live_london_pollution_levels_button,news_updates_button,sorted_areas_button;
+    Button recommended_places_to_live_button,live_london_pollution_levels_button,news_updates_button,sorted_areas_button, bad_areas_button;
     TextView air_quality_text_view;
 
     @Override
@@ -20,13 +20,11 @@ public class AirQuality extends AppCompatActivity {
 
         air_quality_text_view = (TextView) findViewById(R.id.air_quality_text);
 
-        // In question1 get the TextView use by findViewById()
-        // In TextView set question Answer for message
-
         recommended_places_to_live_button = (Button) findViewById(R.id.recommended_places_to_live);
         live_london_pollution_levels_button = (Button) findViewById(R.id.live_london_pollution_levels);
         news_updates_button = (Button) findViewById(R.id.news_updates);
         sorted_areas_button = (Button) findViewById(R.id.list_of_areas);
+        bad_areas_button = (Button) findViewById(R.id.list_of_bad_areas);
         recommended_places_to_live_button.setOnClickListener(v -> {
             Intent intent = new Intent(AirQuality.this, AirQualityPlot.class);
             startActivity(intent);
@@ -44,6 +42,11 @@ public class AirQuality extends AppCompatActivity {
 
         sorted_areas_button.setOnClickListener(v -> {
             Intent intent = new Intent(AirQuality.this,SortedAreas.class);
+            startActivity(intent);
+        });
+
+        bad_areas_button.setOnClickListener(v ->  {
+            Intent intent = new Intent(AirQuality.this,BadAreas.class);
             startActivity(intent);
         });
 
