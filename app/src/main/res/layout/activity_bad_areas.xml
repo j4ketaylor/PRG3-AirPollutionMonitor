@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,24 +8,22 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SortedAreas"
-        android:id="@+id/sorted_areas_page">
+        tools:context=".BadAreas">
 
         <TextView
-            android:id="@+id/sorted_areas"
+            android:id="@+id/sorted_areas_bad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="60dp"
-            android:text="London Areas"
+            android:text="Areas To Avoid"
             android:textSize="50sp"
             android:textStyle="bold"
             android:fontFamily="@font/roboto_bold"/>
 
-
         <TextView
-            android:id="@+id/list_of_areas_unsorted"
+            android:id="@+id/list_of_areas_unsorted_bad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
@@ -35,7 +32,7 @@
             android:text="" />
 
         <TextView
-            android:id="@+id/numbers_of_areas"
+            android:id="@+id/numbers_of_areas_bad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="300dp"

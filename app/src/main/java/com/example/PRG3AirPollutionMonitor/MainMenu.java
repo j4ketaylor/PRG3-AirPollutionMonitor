@@ -67,6 +67,7 @@ public class MainMenu extends AppCompatActivity {
 //            start_time_ms = 6000;
 //        }
 
+
         XCALDBHelper = new CALDBHelper(this);
 
         // by ID we can use each component which id is assign in xml file
@@ -289,7 +290,7 @@ public class MainMenu extends AppCompatActivity {
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
         managerCompat.notify(1,builder.build());
-
+        
     }
     public void createNotificationChannel(){
         NotificationChannel prescrip_channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);

@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-public class SortedAreas extends AppCompatActivity {
+public class BadAreas extends AppCompatActivity {
     String x;
     HashMap<String, String> values = new HashMap<String, String>();
 
-    TextView sorted_areas_text;
-    static TextView list_of_areas_unsorted_text;
-    static TextView numbers_of_areas_text;
+    TextView sorted_areas_text_bad;
+    static TextView list_of_areas_unsorted_text_2;
+    static TextView numbers_of_areas_text_2;
     static String all_areas;
     static String all_numbers;
 
@@ -29,12 +29,12 @@ public class SortedAreas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sorted_areas);
+        setContentView(R.layout.activity_bad_areas);
 
-        sorted_areas_text = (TextView) findViewById(R.id.sorted_areas);
+        sorted_areas_text_bad = (TextView) findViewById(R.id.sorted_areas_bad);
 
-        list_of_areas_unsorted_text = findViewById(R.id.list_of_areas_unsorted);
-        numbers_of_areas_text = findViewById(R.id.numbers_of_areas);
+        list_of_areas_unsorted_text_2 = findViewById(R.id.list_of_areas_unsorted_bad);
+        numbers_of_areas_text_2 = findViewById(R.id.numbers_of_areas_bad);
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -52,23 +52,30 @@ public class SortedAreas extends AppCompatActivity {
                         if (Integer.parseInt(y[1]) == 0) {
                             y[1] = "No Info";
                         } else {
-                            if (Integer.parseInt(y[1]) <= 1) {
-                                y[1] = "\uD83D\uDFE2";
-                            } else {
-                                y[1] = "\uD83D\uDFE0";
-                            }
+
+                            System.out.println("This happened");
                         }
-                        values.put(x, y[1]);
+
                         System.out.println(values.get(x));
-                        all_areas = all_areas + items[i] + "\n";
-                        all_numbers = all_numbers + values.get(x) + "\n";
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                list_of_areas_unsorted_text.setText(all_areas);
-                                numbers_of_areas_text.setText(all_numbers);
+                        try {
+                            if (Integer.parseInt(y[1]) >= 2) {
+                                y[1] = "\uD83D\uDFE0";
+                                values.put(x, y[1]);
+                                all_areas = all_areas + items[i] + "\n";
+                                all_numbers = all_numbers + values.get(x) + "\n";
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        list_of_areas_unsorted_text_2.setText(all_areas);
+                                        numbers_of_areas_text_2.setText(all_numbers);
+                                    }
+                                });
+                            } else {
                             }
-                        });
+                        } catch (NumberFormatException n) {
+                        }
+
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
