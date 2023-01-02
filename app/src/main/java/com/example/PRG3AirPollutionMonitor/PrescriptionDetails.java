@@ -114,7 +114,7 @@ public class PrescriptionDetails extends AppCompatActivity {
                 if (enteredDate == null) {
                     Toast.makeText(PrescriptionDetails.this, "Error: Invalid Date Format", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (enteredDate.isAfter(dateNow)) {
+                      if (enteredDate.isAfter(dateNow)) {
                         if (Float.parseFloat(new_prescription_number_of_uses.getText().toString()) > 0) {
                             if (Float.parseFloat(new_prescription_dosage_interval.getText().toString()) > 0) {
                                 remaining_inhaler_uses_text.setText(new_prescription_number_of_uses.getText().toString());
@@ -128,7 +128,7 @@ public class PrescriptionDetails extends AppCompatActivity {
                         } else {
                             Toast.makeText(PrescriptionDetails.this, "Error: Invalid Number of Uses", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
+                      } else {
                         Toast.makeText(PrescriptionDetails.this, "Error: Invalid Expiry Date", Toast.LENGTH_SHORT).show();
                     }
                 }
