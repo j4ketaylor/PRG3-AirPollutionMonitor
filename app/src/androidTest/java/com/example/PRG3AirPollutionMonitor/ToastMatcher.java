@@ -31,5 +31,10 @@ public class ToastMatcher extends TypeSafeMatcher<Root> {
         }
         return false;
     }
+
+    public static ToastMatcher toastMatcher() {
+        return new ToastMatcher();
+    }
+
 }
 // End of Reference 1

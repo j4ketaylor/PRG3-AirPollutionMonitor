@@ -105,7 +105,6 @@ public class PrescriptionDetails extends AppCompatActivity {
                 }
                 if (enteredDate == null) {
                     Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_date_format), Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(PrescriptionDetails.this, "Error: Invalid Date Format", Toast.LENGTH_SHORT).show();
                 } else {
                     if (enteredDate.isAfter(dateNow)) {
                         if (Float.parseFloat(new_prescription_number_of_uses.getText().toString()) > 0) {
@@ -114,18 +113,14 @@ public class PrescriptionDetails extends AppCompatActivity {
                                 prescription_expiry_date_text.setText(enteredDate.format(dateFormatter));
                                 dosage_interval = new_prescription_dosage_interval.getText().toString();
                                 saveData();
-//                                Toast.makeText(PrescriptionDetails.this, "Prescription Saved", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_prescription_saved), Toast.LENGTH_SHORT).show();
                             } else {
-//                                Toast.makeText(PrescriptionDetails.this, "Error: Invalid Dosage Interval", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_dosage_interval), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-//                            Toast.makeText(PrescriptionDetails.this, "Error: Invalid Number of Uses", Toast.LENGTH_SHORT).show();
                             Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_no_of_uses), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-//                        Toast.makeText(PrescriptionDetails.this, "Error: Invalid Expiry Date", Toast.LENGTH_SHORT).show();
                         Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_expiry_date), Toast.LENGTH_SHORT).show();
                     }
                 }
