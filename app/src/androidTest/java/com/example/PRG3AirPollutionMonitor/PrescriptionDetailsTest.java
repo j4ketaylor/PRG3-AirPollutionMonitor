@@ -124,44 +124,137 @@ public class PrescriptionDetailsTest {
         onView(withId(R.id.save_text_button)).perform(click());
 
         // Check that input saved in system
-        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
         String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
         assertEquals(savedDosageInterval,"2");
     }
 
     @Test
     public void test_invalidInput_zeroNumOfUses() {
-        // Enter 0 into 'Number of uses' and other valid and save (all inputs must be filled to save properly)
+        // Enter 0 into 'Number of uses' (other inputs valid) and save (all inputs must be filled to save properly)
         onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("0"));
         onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("18/12/2023"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("19/12/2023"));
         onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("2"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("3"));
         onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_text_button)).perform(click());
 
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "0");
+        assertNotEquals(savedExpiryDate,"19/12/2023");
+        assertNotEquals(savedDosageInterval,"3");
     }
 
-//    @Test
-//    public void test_invalidInput_decimalNumOfUses() {
-//        // Enter 1.5 into 'Number of uses' input
-//        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("1.5"));
-//        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+    @Test
+    public void test_invalidInput_pastExpiryDate() {
+        // Enter 12/12/2022 into 'Expiry date' (other inputs valid) and save
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("31"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("12/12/2022"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("1"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.save_text_button)).perform(click());
 
-//    }
-//
-//    @Test
-//    public void test_invalidInput_dayMonthExpiryDate() {
-//    }
-//
-//    @Test
-//    public void test_invalidInput_negativeDosageInterval() {
-//    }
-//
-//    @Test
-//    public void test_invalidInput_zeroDosageInterval() {
-//    }
-//
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "31");
+        assertNotEquals(savedExpiryDate,"12/12/2022");
+        assertNotEquals(savedDosageInterval,"1");
+    }
+
+    @Test
+    public void test_invalidInput_invalidDayExpiryDate() {
+        // Enter 32/12/2024 into 'Expiry date' (other inputs valid) and save
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("31"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("32/12/2024"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("1"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.save_text_button)).perform(click());
+
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "31");
+        assertNotEquals(savedExpiryDate,"32/12/2024");
+        assertNotEquals(savedDosageInterval,"1");
+    }
+
+    @Test
+    public void test_invalidInput_invalidMonthExpiryDate() {
+        // Enter 20/13/2024 into 'Expiry date' (other inputs valid) and save
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("31"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("20/13/2024"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("1"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.save_text_button)).perform(click());
+
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "31");
+        assertNotEquals(savedExpiryDate,"20/13/2024");
+        assertNotEquals(savedDosageInterval,"1");
+    }
+
+    @Test
+    public void test_invalidInput_negativeDosageInterval() {
+        // Enter -1 into 'Dosage interval' (other inputs valid) and save
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("31"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("19/12/2023"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("-1"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.save_text_button)).perform(click());
+
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "31");
+        assertNotEquals(savedExpiryDate,"19/12/2023");
+        assertNotEquals(savedDosageInterval,"-1");
+    }
+
+    @Test
+    public void test_invalidInput_zeroDosageInterval() {
+        // Enter 0 into 'Dosage interval' (other inputs valid) and save
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(replaceText("31"));
+        onView(withId(R.id.new_prescription_number_of_uses_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(replaceText("19/12/2023"));
+        onView(withId(R.id.new_prescription_expiry_date_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(replaceText("0"));
+        onView(withId(R.id.new_prescription_dosage_interval_input)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.save_text_button)).perform(click());
+
+        // Check that all inputs NOT saved in system
+        SharedPreferences sharedPreferences = getInstrumentation().getTargetContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String savedNoOfUses = sharedPreferences.getString(TEXT, "");
+        String savedExpiryDate = sharedPreferences.getString(TEXT2,"");
+        String savedDosageInterval = sharedPreferences.getString(TEXT3,"");
+        assertNotEquals(savedNoOfUses, "31");
+        assertNotEquals(savedExpiryDate,"19/12/2023");
+        assertNotEquals(savedDosageInterval,"0");
+    }
+
 //    @Test
 //    public void test_invalidInput_decimalDosageInterval() {
 //    }
