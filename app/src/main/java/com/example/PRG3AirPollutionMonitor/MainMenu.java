@@ -62,19 +62,6 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
-//        try {
-//            System.out.println(PrescriptionDetails.text3);
-//            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//        } catch (NumberFormatException e) {
-//            System.out.println("This happened");
-//            start_time_ms = 6000;
-//        }
-
-
         XCALDBHelper = new CALDBHelper(this);
 
         // by ID we can use each component which id is assign in xml file
