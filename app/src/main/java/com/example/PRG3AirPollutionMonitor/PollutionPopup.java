@@ -3,6 +3,9 @@ package com.example.PRG3AirPollutionMonitor;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -11,6 +14,8 @@ public class PollutionPopup extends Activity {
     static TextView areas_to_avoid_start_text;
     static String x;
     static String all_areas2;
+    private View popup = null;
+    private LayoutInflater nlayoutInflater;
 
     String[] items = {
             "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "City of London", "Croydon",
@@ -23,10 +28,13 @@ public class PollutionPopup extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        areas_to_avoid_start_text = (TextView) findViewById(R.id.list_of_areas_main_menu);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pollution_popup);
+        nlayoutInflater = LayoutInflater.from(PollutionPopup.this);
+        popup = nlayoutInflater.inflate(R.layout.activity_pollution_popup,null);
+        areas_to_avoid_start_text = (TextView) findViewById(R.id.list_of_areas_main_menu);
         //sets size of popup
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
