@@ -12,11 +12,14 @@ import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,11 +44,14 @@ public class MainMenu extends AppCompatActivity {
     private String eventName;
     private LocalTime time;
     private LocalDate date;
+    private String prescription_expiry_date;
+    private int prescription_uses;
     public static int inhaler_count = 0;
 
     private static Context context;
 
     CALDBHelper XCALDBHelper;
+    LocalDate expiryDate;
 
 
 
@@ -54,19 +60,6 @@ public class MainMenu extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-
-//        try {
-//            System.out.println(PrescriptionDetails.text3);
-//            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//        } catch (NumberFormatException e) {
-//            System.out.println("This happened");
-//            start_time_ms = 6000;
-//        }
-
 
         XCALDBHelper = new CALDBHelper(this);
 
@@ -116,8 +109,12 @@ public class MainMenu extends AppCompatActivity {
 //            }
             time = LocalTime.now();
             date = LocalDate.now();
-            prescription_notification();
             inhaler_count++;
+            prescription_uses--;
+
+            prescription_notification();
+            createNotificationChannel();
+
             //if timer is already running, show a popup indicating overdose and log overdose on calendar
             if (timer_running){
                 Intent intent = new Intent(MainMenu.this,OverdosePopup.class);
@@ -138,14 +135,9 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-
+        load_prescription();
+        prescription_notification();
         createNotificationChannel();
-
-
-
-
-
-
 
     }
 
@@ -272,11 +264,32 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    public void load_prescription(){
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        this.prescription_expiry_date = sharedPreferences.getString("text2", "");
+        this.prescription_uses = Integer.parseInt(sharedPreferences.getString("text", ""));
+    }
+
     public void prescription_notification(){
-        PrescriptionDetails prescri_details = new PrescriptionDetails();
-        int inhaler_uses = prescri_details.getInhalerUsesnot();
-        if (inhaler_uses == 0){
-            prescription_notify();
+
+        //Check if inhaler is expired and notify user
+        try {
+            expiryDate = LocalDate.parse(prescription_expiry_date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            if (expiryDate.isBefore(LocalDate.now())) {
+                expiry_notify();
+            }
+        } catch (Exception e) {
+            Toast.makeText(MainMenu.this, "Failed to process inhaler expiry date", Toast.LENGTH_SHORT).show();
+        }
+
+        //Check if inhaler is used up and notify user
+        try {
+            Toast.makeText(MainMenu.this, "Remaining inhaler uses: " + prescription_uses, Toast.LENGTH_SHORT).show();
+            if (prescription_uses <= 0) {
+                prescription_notify();
+            }
+        } catch (Exception e) {
+            Toast.makeText(MainMenu.this, "Failed to process inhaler uses", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -292,6 +305,20 @@ public class MainMenu extends AppCompatActivity {
         managerCompat.notify(1,builder.build());
         
     }
+
+    public void expiry_notify(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
+        builder.setSmallIcon(R.drawable.ic_android_black_24dp);
+        builder.setContentTitle("Inhaler is expired!");
+        builder.setContentText("Please make sure you have a replacement!");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
+        managerCompat.notify(2,builder.build());
+
+    }
+
     public void createNotificationChannel(){
         NotificationChannel prescrip_channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);
         NotificationManager manager = getSystemService(NotificationManager.class);

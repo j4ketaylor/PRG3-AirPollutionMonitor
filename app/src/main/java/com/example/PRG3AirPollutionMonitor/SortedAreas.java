@@ -12,9 +12,9 @@ public class SortedAreas extends AppCompatActivity {
     String x;
     HashMap<String, String> values = new HashMap<String, String>();
 
-    TextView sorted_areas_text;
     static TextView list_of_areas_unsorted_text;
     static TextView numbers_of_areas_text;
+    static TextView sorted_areas_progress_text;
     static String all_areas;
     static String all_numbers;
 
@@ -31,7 +31,7 @@ public class SortedAreas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorted_areas);
 
-        sorted_areas_text = (TextView) findViewById(R.id.sorted_areas);
+        sorted_areas_progress_text = (TextView) findViewById(R.id.sorted_areas_progress);
 
         list_of_areas_unsorted_text = findViewById(R.id.list_of_areas_unsorted);
         numbers_of_areas_text = findViewById(R.id.numbers_of_areas);
@@ -43,6 +43,10 @@ public class SortedAreas extends AppCompatActivity {
                     all_areas = "";
                     all_numbers = "";
                     for (int i = 0; i < 33; i++) {
+                        sorted_areas_progress_text.setText("Checked area " + i + " of " + 32);
+                        if (i == 32) {
+                            sorted_areas_progress_text.setText("");
+                        }
                         System.out.println(i);
                         x = items[i].toLowerCase().replaceAll("\\s+", "");
                         String data = "";

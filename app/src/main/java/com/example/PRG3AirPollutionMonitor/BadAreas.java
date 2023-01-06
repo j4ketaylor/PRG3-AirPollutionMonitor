@@ -15,6 +15,7 @@ public class BadAreas extends AppCompatActivity {
     TextView sorted_areas_text_bad;
     static TextView list_of_areas_unsorted_text_2;
     static TextView numbers_of_areas_text_2;
+    static TextView bad_areas_progress_text;
     static String all_areas;
     static String all_numbers;
 
@@ -32,9 +33,11 @@ public class BadAreas extends AppCompatActivity {
         setContentView(R.layout.activity_bad_areas);
 
         sorted_areas_text_bad = (TextView) findViewById(R.id.sorted_areas_bad);
+        bad_areas_progress_text = (TextView) findViewById(R.id.bad_areas_progress);
 
         list_of_areas_unsorted_text_2 = findViewById(R.id.list_of_areas_unsorted_bad);
         numbers_of_areas_text_2 = findViewById(R.id.numbers_of_areas_bad);
+
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -43,6 +46,10 @@ public class BadAreas extends AppCompatActivity {
                     all_areas = "";
                     all_numbers = "";
                     for (int i = 0; i < 33; i++) {
+                        bad_areas_progress_text.setText("Checked area " + i + " of " + 32);
+                        if (i == 32) {
+                            bad_areas_progress_text.setText("");
+                        }
                         System.out.println(i);
                         x = items[i].toLowerCase().replaceAll("\\s+", "");
                         String data = "";
