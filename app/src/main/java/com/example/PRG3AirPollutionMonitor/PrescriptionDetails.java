@@ -121,7 +121,7 @@ public class PrescriptionDetails extends AppCompatActivity {
                             Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_no_of_uses), Toast.LENGTH_SHORT).show();
                         }
                       } else {
-                        Toast.makeText(PrescriptionDetails.this, "Error: Invalid Expiry Date", Toast.LENGTH_SHORT).show();
+                          Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_expiry_date), Toast.LENGTH_SHORT).show();
                     }
                 }
 
