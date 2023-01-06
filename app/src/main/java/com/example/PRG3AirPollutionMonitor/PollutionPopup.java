@@ -19,6 +19,7 @@ public class PollutionPopup extends Activity {
             "Merton", "Newham", "Redbridge", "Richmond", "Southwark", "Sutton", "Tower Hamlets", "Waltham Forest",
             "Wandsworth", "Westminster"
     };
+
     HashMap<String, String> values = new HashMap<String, String>();
 
     @Override
