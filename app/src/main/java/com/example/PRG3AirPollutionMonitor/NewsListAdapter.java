@@ -48,7 +48,18 @@ public class NewsListAdapter extends BaseAdapter {
         textViewTitle.setText(news.getTitle());
 
         TextView textViewDescription = (TextView) view.findViewById(R.id.text_view_description);
-        String description = news.getDescription();
+
+        // Limit description to 300 characters
+        int charLimit = 300;
+        String fullDescription = news.getDescription();
+        String description = fullDescription.substring(0, Math.min(fullDescription.length(), charLimit));
+
+        // Add " ..." to the end of the description if it was cut off
+        if (fullDescription.length() > charLimit) {
+            description += " ...";
+        }
+
+        // Set the description to default if it is empty
         if (description != null && !description.equals("null")) {
             textViewDescription.setText(description);
         } else {
