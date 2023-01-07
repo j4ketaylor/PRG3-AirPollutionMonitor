@@ -80,9 +80,7 @@ public class PrescriptionDetails extends AppCompatActivity {
 
     private String text;
     private String text2;
-    public static String text3;
-
-    private int InhalerUsesnot;
+    private String text3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,26 +162,13 @@ public class PrescriptionDetails extends AppCompatActivity {
     public void updateViews() {
 
         try {
-            Integer userUses = Integer.valueOf(text);
 
-            //Integer expiryDate = Integer.valueOf(text2);
-            Integer inhalerUses = userUses - MainMenu.inhaler_count;
-
-            this.InhalerUsesnot = inhalerUses;
-
-            remaining_inhaler_uses_text.setText(inhalerUses.toString());
+            remaining_inhaler_uses_text.setText(text);
 
             prescription_expiry_date_text.setText(text2);
 
-            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-            editor.putString(TEXT, inhalerUses.toString());
-            editor.apply();
-            MainMenu.inhaler_count = 0;
-
-        } catch (NumberFormatException e) {
-            System.out.println("Error");
+        } catch (Exception e) {
+            System.out.println("Update View Error");
         }
 
     }
@@ -194,10 +179,5 @@ public class PrescriptionDetails extends AppCompatActivity {
         super.onStop();
         MainMenu.saveVar(this);
     }
-
-    public int getInhalerUsesnot(){
-        return this.InhalerUsesnot;
-    }
-
 }
 

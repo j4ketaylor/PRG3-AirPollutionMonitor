@@ -5,22 +5,19 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -47,7 +44,6 @@ public class MainMenu extends AppCompatActivity {
     private LocalDate date;
     private String prescription_expiry_date;
     private int prescription_uses;
-    public static int inhaler_count = 0;
 
     private static Context context;
 
@@ -101,20 +97,16 @@ public class MainMenu extends AppCompatActivity {
         });
         context = this;
         countdown_button.setOnClickListener(v -> {
-//            try {
-//                System.out.println(PrescriptionDetails.text3);
-//                start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//            } catch (NumberFormatException e) {
-//                System.out.println("This happened");
-//                start_time_ms = 6000;
-//            }
+
+            load_prescription_dosage_interval();
             time = LocalTime.now();
             date = LocalDate.now();
-            inhaler_count++;
-            prescription_uses--;
 
-            load_prescription();
-            prescription_notification();
+            load_prescription_detail();
+            prescription_uses--;
+            update_prescription_use();
+            prescription_use_notification();
+            prescription_expiry_notification();
             createNotificationChannel();
 
             //if timer is already running, show a popup indicating overdose and log overdose on calendar
@@ -137,8 +129,9 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        load_prescription();
-        prescription_notification();
+        load_prescription_detail();
+        prescription_use_notification();
+        prescription_expiry_notification();
         createNotificationChannel();
 
     }
@@ -156,13 +149,10 @@ public class MainMenu extends AppCompatActivity {
     }
     //starts the timer
     private void startTimer(){
-//        try {
-//            System.out.println(PrescriptionDetails.text3);
-//            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//        } catch (NumberFormatException e) {
-//            System.out.println("This happened");
-//            start_time_ms = 6000;
-//        }
+
+        //Prescription dosage interval already loaded
+            //load_prescription_dosage_interval();
+
         //finds end time based on time left and current time of system, used to be saved to find time left after stopping the app
         end_time = System.currentTimeMillis() + time_left_ms;
         //initializes the timer
@@ -186,19 +176,17 @@ public class MainMenu extends AppCompatActivity {
     }
     //resets the timer
     private void resetTimer(){
-//        try {
-//            System.out.println(PrescriptionDetails.text3);
-//            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//        } catch (NumberFormatException e) {
-//            System.out.println("This happened");
-//            start_time_ms = 6000;
-//        }
+
+        //Prescription dosage interval already loaded
+            //load_prescription_dosage_interval();
+
         //shows app that the timer is not running
         timer_running = false;
         //resets text on timer
         countdown_button.setText("log inhaler use");
         //resets time of timer
         time_left_ms = start_time_ms;
+
     }
     //updates text on timer according to the time left
     private void updatetext(){
@@ -216,9 +204,6 @@ public class MainMenu extends AppCompatActivity {
         editor.putLong("end_time",end_time);
         editor.putLong("time_left_ms",time_left_ms);
         editor.putBoolean("running",timer_running);
-        try{
-            editor.putLong("dosage_interval",Long.valueOf(PrescriptionDetails.text3)*60000);
-        } catch(NumberFormatException e){}
         editor.apply();
     }
     @Override
@@ -227,29 +212,22 @@ public class MainMenu extends AppCompatActivity {
         super.onStop();
         //adds variables to a shared preference
         saveVar(this);
+
     }
     @Override
     //determines action of timer based on information saved when the app was stopped
     protected void onStart(){
         super.onStart();
-//        try {
-//            System.out.println(PrescriptionDetails.text3);
-//            start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-//        } catch (NumberFormatException e) {
-//            System.out.println("This happened");
-//            start_time_ms = 6000;
-//        }
+
         //loads information of the timer before it was stopped when the app is started
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
+
         //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
-        //default time left is the start time
-            time_left_ms = pref.getLong("time_left_ms",0);
-            try{
-                start_time_ms = Long.valueOf(PrescriptionDetails.text3)*60000;
-            } catch(NumberFormatException e) {
-                start_time_ms = pref.getLong("dosage_interval", 6000);
-            }
+
+        //loads the start time
+        load_prescription_dosage_interval();
+
         //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
@@ -266,41 +244,84 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
-    public void load_prescription(){
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
-        this.prescription_expiry_date = sharedPreferences.getString("text2", "");
-        this.prescription_uses = Integer.parseInt(sharedPreferences.getString("text", ""));
+    public void load_prescription_dosage_interval(){
+        //loads the prescription dosage interval from the database
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs",MODE_PRIVATE);
+            double dosage_interval = Double.parseDouble(sharedPreferences.getString("text3", ""));
+
+            //converts dosage interval from minutes to milliseconds
+            start_time_ms = (long) (dosage_interval * 60000);
+
+        } catch(Exception e) {
+            Toast.makeText(MainMenu.this, "Failed to load dosage interval", Toast.LENGTH_SHORT).show();
+            //use default dosage interval
+            start_time_ms = 6000;
+        }
     }
 
-    public void prescription_notification(){
+    public void load_prescription_detail(){
+        try{
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        this.prescription_expiry_date = sharedPreferences.getString("text2", "");
+        this.prescription_uses = Integer.parseInt(sharedPreferences.getString("text", ""));}
+        catch (Exception e){
+            Toast.makeText(MainMenu.this, "Failed to load inhaler prescription", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void update_prescription_use(){
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putString("text", String.valueOf(this.prescription_uses));
+            editor.apply();
+        }
+        catch (Exception e){
+            Toast.makeText(MainMenu.this, "Failed to update inhaler prescription", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    public void prescription_use_notification(){
 
         //Check if inhaler is used up and notify user
         try {
             Toast.makeText(MainMenu.this, "Remaining inhaler uses: " + prescription_uses, Toast.LENGTH_SHORT).show();
-            if (prescription_uses <= 0) {
-                prescription_notify();
+            if (prescription_uses <= 10 && prescription_uses > 0) {
+                inhaler_use_notify();
+            } else if (prescription_uses <= 0) {
+                inhaler_use_notify_urgent();
+
             }
         } catch (Exception e) {
             Toast.makeText(MainMenu.this, "Failed to process inhaler uses", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void prescription_expiry_notification(){
 
         //Check if inhaler is expired and notify user
             try {
             expiryDate = LocalDate.parse(prescription_expiry_date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             Toast.makeText(MainMenu.this, "Inhaler Expiry Date: " + expiryDate, Toast.LENGTH_SHORT).show();
-            if (expiryDate.isBefore(LocalDate.now())) {
-                expiry_notify();
+            if (expiryDate.isBefore(LocalDate.now().plus(Period.ofWeeks(1)))&& expiryDate.isAfter(LocalDate.now())) {
+                inhaler_expiry_notify();
+            } else if (expiryDate.isBefore(LocalDate.now())) {
+                inhaler_expiry_notify_urgent();
             }
         } catch (Exception e) {
             Toast.makeText(MainMenu.this, "Failed to process inhaler expiry date", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void prescription_notify(){
+    public void inhaler_use_notify(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
         builder.setSmallIcon(R.drawable.ic_android_black_24dp);
         builder.setContentTitle("Inhaler is low!");
-        builder.setContentText("Please make sure you have a replacement!");
+        builder.setContentText("Please prepare for replacement");
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setAutoCancel(true);
 
@@ -309,7 +330,33 @@ public class MainMenu extends AppCompatActivity {
         
     }
 
-    public void expiry_notify(){
+    public void inhaler_use_notify_urgent(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
+        builder.setSmallIcon(R.drawable.ic_android_black_24dp);
+        builder.setContentTitle("Inhaler is used up!");
+        builder.setContentText("Please make sure you have a replacement!");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
+        managerCompat.notify(2,builder.build());
+
+    }
+
+    public void inhaler_expiry_notify(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
+        builder.setSmallIcon(R.drawable.ic_android_black_24dp);
+        builder.setContentTitle("Inhaler is about to expire!");
+        builder.setContentText("Please prepare for replacement");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
+        managerCompat.notify(3,builder.build());
+
+    }
+
+    public void inhaler_expiry_notify_urgent(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
         builder.setSmallIcon(R.drawable.ic_android_black_24dp);
         builder.setContentTitle("Inhaler is expired!");
@@ -318,7 +365,7 @@ public class MainMenu extends AppCompatActivity {
         builder.setAutoCancel(true);
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainMenu.this);
-        managerCompat.notify(2,builder.build());
+        managerCompat.notify(4,builder.build());
 
     }
 
