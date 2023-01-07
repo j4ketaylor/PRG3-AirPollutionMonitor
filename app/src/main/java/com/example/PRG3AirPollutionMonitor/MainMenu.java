@@ -26,11 +26,11 @@ import java.util.Locale;
 public class MainMenu extends AppCompatActivity {
 
     // define the global variable
-    TextView question1;
+    TextView welcomeTitle;
     // Add button Move to Activity
-    Button next_Activity_button;
-    Button emergency_button;
-    Button inhaler_button;
+    Button airQualityButton;
+    Button emergencyButton;
+    Button inhalerButton;
     Button countdown_button;
 
     //define variables needed for the countdown button
@@ -42,8 +42,8 @@ public class MainMenu extends AppCompatActivity {
     private String eventName;
     private LocalTime time;
     private LocalDate date;
-    private String prescription_expiry_date;
-    private int prescription_uses;
+    String prescription_expiry_date;
+    int prescription_uses;
 
     private static Context context;
 
@@ -62,17 +62,17 @@ public class MainMenu extends AppCompatActivity {
 
         // by ID we can use each component which id is assign in xml file
         // use findViewById() to get the Button
-        next_Activity_button = (Button) findViewById(R.id.first_activity_button);
-        emergency_button = (Button) findViewById(R.id.emergency);
-        inhaler_button = (Button) findViewById(R.id.inhaler_menu);
-        countdown_button = (Button) findViewById(R.id.countdown_timer);
-        question1 = (TextView) findViewById(R.id.question1_id);
+        airQualityButton = (Button) findViewById(R.id.air_quality_button);
+        emergencyButton = (Button) findViewById(R.id.emergency_button);
+        inhalerButton = (Button) findViewById(R.id.inhaler_button);
+        countdown_button = (Button) findViewById(R.id.countdown_button);
+        welcomeTitle = (TextView) findViewById(R.id.welcome_title);
 
         // In question1 get the TextView use by findViewById()
         // In TextView set question Answer for message
 
         // Add_button add clicklistener
-        next_Activity_button.setOnClickListener(v -> {
+        airQualityButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, AirQuality.class);
@@ -80,7 +80,7 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        emergency_button.setOnClickListener(v -> {
+        emergencyButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, Emergency.class);
@@ -88,7 +88,7 @@ public class MainMenu extends AppCompatActivity {
             startActivity(intent);
         });
 
-        inhaler_button.setOnClickListener(v -> {
+        inhalerButton.setOnClickListener(v -> {
             // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
             // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, InhalerMenu.class);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Main_Menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/question1_id"
+        android:id="@+id/welcome_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -21,7 +22,7 @@
 
 
     <Button
-        android:id="@+id/first_activity_button"
+        android:id="@+id/air_quality_button"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_marginTop="200dp"
@@ -35,7 +36,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/emergency"
+        android:id="@+id/emergency_button"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
@@ -49,7 +50,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/inhaler_menu"
+        android:id="@+id/inhaler_button"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
@@ -63,7 +64,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/countdown_timer"
+        android:id="@+id/countdown_button"
         android:layout_width="250dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"

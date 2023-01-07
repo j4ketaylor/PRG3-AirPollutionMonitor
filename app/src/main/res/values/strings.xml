@@ -35,4 +35,11 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="record_use_button_text">Record Use</string>
+    <string name="inhaler_overdose_message">Warning! Inhaler Overdosed</string>
+    <string name="inhaler_use_recorded_message">Inhaler Use Recorded</string>
+    <string name="toast_prescription_saved">Prescription Saved</string>
+    <string name="toast_error_no_of_uses">Error: Invalid Number of Uses</string>
+    <string name="toast_error_dosage_interval">Error: Invalid Dosage Interval</string>
+    <string name="toast_error_expiry_date">Error: Invalid Expiry Date</string>
+    <string name="toast_error_date_format">Error: Invalid Date Format</string>
 </resources>

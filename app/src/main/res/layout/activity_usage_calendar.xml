@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UsageCalendar">
+    tools:context=".UsageCalendar"
+    android:id="@+id/usage_calendar_page">
 
     <TextView
         android:id="@+id/usage_calendar_title"

@@ -1,7 +1,5 @@
 package com.example.PRG3AirPollutionMonitor;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +10,10 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 
 public class PrescriptionDetails extends AppCompatActivity {
     private TextView remaining_inhaler_uses_text;
@@ -110,7 +102,7 @@ public class PrescriptionDetails extends AppCompatActivity {
                     }
                 }
                 if (enteredDate == null) {
-                    Toast.makeText(PrescriptionDetails.this, "Error: Invalid Date Format", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_date_format), Toast.LENGTH_SHORT).show();
                 } else {
                       if (enteredDate.isAfter(dateNow)) {
                         if (Float.parseFloat(new_prescription_number_of_uses.getText().toString()) > 0) {
@@ -119,15 +111,15 @@ public class PrescriptionDetails extends AppCompatActivity {
                                 prescription_expiry_date_text.setText(enteredDate.format(dateFormatter));
                                 dosage_interval = new_prescription_dosage_interval.getText().toString();
                                 saveData();
-                                Toast.makeText(PrescriptionDetails.this, "Prescription Saved", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_prescription_saved), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(PrescriptionDetails.this, "Error: Invalid Dosage Interval", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_dosage_interval), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(PrescriptionDetails.this, "Error: Invalid Number of Uses", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_no_of_uses), Toast.LENGTH_SHORT).show();
                         }
                       } else {
-                        Toast.makeText(PrescriptionDetails.this, "Error: Invalid Expiry Date", Toast.LENGTH_SHORT).show();
+                          Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_expiry_date), Toast.LENGTH_SHORT).show();
                     }
                 }
 
