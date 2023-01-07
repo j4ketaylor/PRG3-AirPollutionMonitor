@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:text="@string/daily_calendar_title"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:fontFamily="@font/roboto_bold"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:onClick="previousWeek"
             android:text="◀"
             android:backgroundTint="@color/malibu_blue1"
@@ -45,13 +45,13 @@
             android:text="November 2021"
             android:textAlignment="center"
             android:textColor="@color/prussian_blue4"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:background="@null"
             android:onClick="nextWeek"

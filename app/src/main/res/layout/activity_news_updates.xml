@@ -8,10 +8,32 @@
     tools:context=".NewsUpdates">
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleWebView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="London Air Quality News"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp" />
+
+    <WebView
+        android:id="@+id/news_web_view"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"/>
+
+    <Button
+        android:id="@+id/news_button"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:backgroundTint="@color/malibu_blue1"/>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="London Daily News"
         android:textSize="24sp"
         android:textStyle="bold"
         android:padding="16dp" />
