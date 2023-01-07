@@ -126,6 +126,7 @@ public class MainMenu extends AppCompatActivity {
             inhaler_count++;
             prescription_uses--;
 
+            load_prescription();
             prescription_notification();
             createNotificationChannel();
 
@@ -286,16 +287,6 @@ public class MainMenu extends AppCompatActivity {
 
     public void prescription_notification(){
 
-        //Check if inhaler is expired and notify user
-        try {
-            expiryDate = LocalDate.parse(prescription_expiry_date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            if (expiryDate.isBefore(LocalDate.now())) {
-                expiry_notify();
-            }
-        } catch (Exception e) {
-            Toast.makeText(MainMenu.this, "Failed to process inhaler expiry date", Toast.LENGTH_SHORT).show();
-        }
-
         //Check if inhaler is used up and notify user
         try {
             Toast.makeText(MainMenu.this, "Remaining inhaler uses: " + prescription_uses, Toast.LENGTH_SHORT).show();
@@ -304,6 +295,17 @@ public class MainMenu extends AppCompatActivity {
             }
         } catch (Exception e) {
             Toast.makeText(MainMenu.this, "Failed to process inhaler uses", Toast.LENGTH_SHORT).show();
+        }
+
+        //Check if inhaler is expired and notify user
+            try {
+            expiryDate = LocalDate.parse(prescription_expiry_date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            Toast.makeText(MainMenu.this, "Inhaler Expiry Date: " + expiryDate, Toast.LENGTH_SHORT).show();
+            if (expiryDate.isBefore(LocalDate.now())) {
+                expiry_notify();
+            }
+        } catch (Exception e) {
+            Toast.makeText(MainMenu.this, "Failed to process inhaler expiry date", Toast.LENGTH_SHORT).show();
         }
     }
 
