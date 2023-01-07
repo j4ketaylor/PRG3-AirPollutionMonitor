@@ -8,6 +8,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.junit.Assert.assertEquals;
+
 import android.content.Intent;
 
 import androidx.test.core.app.ActivityScenario;
@@ -89,4 +91,13 @@ public class MainMenuTest {
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
+//    @Test
+//    public void test_inhalerCountIncrementsWhenInhalerButtonPressed() {
+//        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
+//        ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
+//
+//        int initialCount = MainMenu.inhaler_count;
+//        onView(withId(R.id.inhaler_button)).perform(click());
+//        assertEquals(initialCount+1,MainMenu.inhaler_count);
+//    }
 }
