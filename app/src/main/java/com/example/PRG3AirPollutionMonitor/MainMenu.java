@@ -42,8 +42,8 @@ public class MainMenu extends AppCompatActivity {
     private String eventName;
     private LocalTime time;
     private LocalDate date;
-    private String prescription_expiry_date;
-    private int prescription_uses;
+    String prescription_expiry_date;
+    int prescription_uses;
 
     private static Context context;
 

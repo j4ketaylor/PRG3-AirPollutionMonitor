@@ -91,13 +91,4 @@ public class MainMenuTest {
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
-//    @Test
-//    public void test_inhalerCountIncrementsWhenInhalerButtonPressed() {
-//        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
-//        ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
-//
-//        int initialCount = MainMenu.inhaler_count;
-//        onView(withId(R.id.inhaler_button)).perform(click());
-//        assertEquals(initialCount+1,MainMenu.inhaler_count);
-//    }
 }
