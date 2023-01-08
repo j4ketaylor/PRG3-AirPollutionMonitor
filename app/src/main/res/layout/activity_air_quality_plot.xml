@@ -16,7 +16,7 @@ android:fillViewport="true">
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:text="London Areas"
             android:textSize="50sp"
             android:textStyle="bold"
@@ -201,6 +201,18 @@ android:fillViewport="true">
             android:layout_height="wrap_content"
             android:layout_marginTop="6300dp"
             android:src="@drawable/image_027" />.
+
+        <Button
+            android:id="@+id/plot_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:drawableLeft="@drawable/ic_more_info"
+            android:text="More Information"
+            android:textSize="12dp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/black" />
 
 </RelativeLayout>
 </ScrollView>

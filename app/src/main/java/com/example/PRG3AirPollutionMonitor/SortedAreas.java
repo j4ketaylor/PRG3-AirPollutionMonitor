@@ -2,8 +2,10 @@ package com.example.PRG3AirPollutionMonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -17,6 +19,8 @@ public class SortedAreas extends AppCompatActivity {
     static TextView sorted_areas_progress_text;
     static String all_areas;
     static String all_numbers;
+
+    Button sorted_areas_info_button;
 
     String[] items = {
             "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "City of London", "Croydon",
@@ -32,6 +36,12 @@ public class SortedAreas extends AppCompatActivity {
         setContentView(R.layout.activity_sorted_areas);
 
         sorted_areas_progress_text = (TextView) findViewById(R.id.sorted_areas_progress);
+
+        sorted_areas_info_button = (Button) findViewById(R.id.sorted_areas_info);
+        sorted_areas_info_button.setOnClickListener(v -> {
+            Intent intent = new Intent(SortedAreas.this, IndexInfo.class);
+            startActivity(intent);
+        });
 
         list_of_areas_unsorted_text = findViewById(R.id.list_of_areas_unsorted);
         numbers_of_areas_text = findViewById(R.id.numbers_of_areas);

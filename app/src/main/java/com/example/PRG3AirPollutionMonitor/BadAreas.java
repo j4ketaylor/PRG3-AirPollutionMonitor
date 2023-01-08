@@ -2,8 +2,10 @@ package com.example.PRG3AirPollutionMonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -19,6 +21,8 @@ public class BadAreas extends AppCompatActivity {
     static String all_areas;
     static String all_numbers;
 
+    Button bad_areas_info_button;
+
     String[] items = {
             "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "City of London", "Croydon",
             "Ealing", "Enfield", "Greenwich", "Hackney", "Hammersmith and Fulham", "Haringey", "Harrow", "Havering",
@@ -31,6 +35,12 @@ public class BadAreas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bad_areas);
+
+        bad_areas_info_button = (Button) findViewById(R.id.bad_areas_info);
+        bad_areas_info_button.setOnClickListener(v -> {
+            Intent intent = new Intent(BadAreas.this, IndexInfo.class);
+            startActivity(intent);
+        });
 
         sorted_areas_text_bad = (TextView) findViewById(R.id.sorted_areas_bad);
         bad_areas_progress_text = (TextView) findViewById(R.id.bad_areas_progress);
@@ -91,4 +101,5 @@ public class BadAreas extends AppCompatActivity {
         });
         thread.start();
     }
+
 }
