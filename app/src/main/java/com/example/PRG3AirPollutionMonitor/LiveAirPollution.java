@@ -1,12 +1,15 @@
 package com.example.PRG3AirPollutionMonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.RequestQueue;
@@ -18,6 +21,8 @@ public class LiveAirPollution extends AppCompatActivity {
     TextView location_live_viewer;
     TextView air_pollution_rating_viewer;
     String x;
+
+    Button live_info_button;
 
     String[] items = {
             "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "City of London", "Croydon",
@@ -34,6 +39,13 @@ public class LiveAirPollution extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_air_pollution);
+
+        live_info_button = (Button) findViewById(R.id.live_info);
+        live_info_button.setOnClickListener(v -> {
+            Intent intent = new Intent(LiveAirPollution.this, IndexInfo.class);
+            startActivity(intent);
+        });
+
         RequestQueue queue = Volley.newRequestQueue(LiveAirPollution.this);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
