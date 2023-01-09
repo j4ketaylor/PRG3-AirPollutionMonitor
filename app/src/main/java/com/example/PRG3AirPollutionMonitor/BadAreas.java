@@ -75,6 +75,7 @@ public class BadAreas extends AppCompatActivity {
 
                         System.out.println(values.get(x));
                         try {
+                            //Same as SortedAreas activity, but only includes areas that have a higher risk to asthma sufferers
                             if (Integer.parseInt(y[1]) >= 2) {
                                 y[1] = "\uD83D\uDD34";
                                 values.put(x, y[1]);

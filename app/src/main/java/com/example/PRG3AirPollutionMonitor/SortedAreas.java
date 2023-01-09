@@ -52,7 +52,9 @@ public class SortedAreas extends AppCompatActivity {
                 try  {
                     all_areas = "";
                     all_numbers = "";
+                    //Iterates through all boroughs
                     for (int i = 0; i < 33; i++) {
+                        //Tells the user how far through the checking process the app is
                         sorted_areas_progress_text.setText("Checked area " + i + " of " + 32);
                         if (i == 32) {
                             sorted_areas_progress_text.setText("");
@@ -60,6 +62,7 @@ public class SortedAreas extends AppCompatActivity {
                         System.out.println(i);
                         x = items[i].toLowerCase().replaceAll("\\s+", "");
                         String data = "";
+                        //Uses getAQI class to get AQI for each borough
                         getAQI getInformation = new getAQI(x, data);
                         String[] y = getInformation.AQIOutput();
                         System.out.println(y[1]);
@@ -67,6 +70,7 @@ public class SortedAreas extends AppCompatActivity {
                         if (Integer.parseInt(y[1]) == 0) {
                             y[1] = "No Info";
                         } else {
+                            //Sets AQI colour to red or green, depending on if borough is safe or not
                             if (Integer.parseInt(y[1]) <= 1) {
                                 y[1] = "\uD83D\uDFE2";
                             } else {
