@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.TextView;
@@ -254,7 +255,7 @@ public class MainMenu extends AppCompatActivity {
             start_time_ms = (long) (dosage_interval * 60000);
 
         } catch(Exception e) {
-            Toast.makeText(MainMenu.this, "Failed to load dosage interval", Toast.LENGTH_SHORT).show();
+            Log.e( "Failed to load dosage interval", e.getMessage());
             //use default dosage interval
             start_time_ms = 6000;
         }
@@ -266,7 +267,7 @@ public class MainMenu extends AppCompatActivity {
         this.prescription_expiry_date = sharedPreferences.getString("text2", "");
         this.prescription_uses = Integer.parseInt(sharedPreferences.getString("text", ""));}
         catch (Exception e){
-            Toast.makeText(MainMenu.this, "Failed to load inhaler prescription", Toast.LENGTH_SHORT).show();
+            Log.e( "Failed to load inhaler prescription", e.getMessage());
         }
     }
 
@@ -279,11 +280,9 @@ public class MainMenu extends AppCompatActivity {
             editor.apply();
         }
         catch (Exception e){
-            Toast.makeText(MainMenu.this, "Failed to update inhaler prescription", Toast.LENGTH_SHORT).show();
+            Log.e( "Failed to update inhaler prescription", e.getMessage());
         }
     }
-
-
 
     public void prescription_use_notification(){
 
@@ -297,7 +296,7 @@ public class MainMenu extends AppCompatActivity {
 
             }
         } catch (Exception e) {
-            Toast.makeText(MainMenu.this, "Failed to process inhaler uses", Toast.LENGTH_SHORT).show();
+            Log.e( "Failed to process inhaler uses", e.getMessage());
         }
     }
 
@@ -313,7 +312,7 @@ public class MainMenu extends AppCompatActivity {
                 inhaler_expiry_notify_urgent();
             }
         } catch (Exception e) {
-            Toast.makeText(MainMenu.this, "Failed to process inhaler expiry date", Toast.LENGTH_SHORT).show();
+            Log.e( "Failed to process inhaler expiry date", e.getMessage());
         }
     }
 
