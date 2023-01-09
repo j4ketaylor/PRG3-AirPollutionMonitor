@@ -52,14 +52,7 @@ public class getAQI {
 
             Hashtable<String, String> colour_list = new Hashtable<String, String>();
 
-            colour_list.put("Carbon Monoxide", "");
-            colour_list.put("Nitrogen Dioxide", "");
-            colour_list.put("Ozone", "");
-            colour_list.put("PM10 Particulate", "");
-            colour_list.put("PM2.5 Particulate", "");
-            colour_list.put("Sulphur Dioxide", "");
             colour_list.put("Asthma Index", "");
-
 
             URL new_url = new URL("https://api.erg.ic.ac.uk/AirQuality/Daily/MonitoringIndex/Latest/GroupName=" + x + "/Json");
             HttpURLConnection httpURLConnection = (HttpURLConnection) new_url.openConnection();
@@ -121,7 +114,6 @@ public class getAQI {
                 }
             }
 
-
             for (int i = 0; i < 6; i++) {
                 if (my_dict_no_of_entries.get(species_list.get(i)) == 0) {
                     my_dict_no_of_entries.put(species_list.get(i), 1);
@@ -140,22 +132,18 @@ public class getAQI {
                     + (my_dict.get("Sulphur Dioxide") / my_dict_no_of_entries.get("Sulphur Dioxide"))
                     + 2 * (my_dict.get("PM2.5 Particulate") / my_dict_no_of_entries.get("PM2.5 Particulate"))))));
 
-
-            String asthma_index_color;
             if (asthma_index <= 2) {
                 colour_list.put("Asthma Index","\uD83D\uDFE2");
-//            } else if (asthma_index <= 2) {
-//                colour_list.put("Asthma Index","\uD83D\uDFE0");
             } else {
                 colour_list.put("Asthma Index","\uD83D\uDFE0");
             }
 
-            return new String[] {("Carbon Monoxide:   " + air_pollution_ratings.get("Carbon Monoxide") + " " + colour_list.get("Carbon Monoxide") +"\n" +
-                            "Nitrogen Dioxide:     " + air_pollution_ratings.get("Nitrogen Dioxide") + " " + colour_list.get("Nitrogen Dioxide") +"\n" +
-                            "Ozone:                        " + air_pollution_ratings.get("Ozone") + " " + colour_list.get("Ozone") +"\n" +
-                            "PM10 Particulate:    " + air_pollution_ratings.get("PM10 Particulate") + " " + colour_list.get("PM10 Particulate") +"\n" +
-                            "PM2.5 Particulate:   " + air_pollution_ratings.get("PM2.5 Particulate") + " " + colour_list.get("PM2.5 Particulate") +"\n" +
-                            "Sulphur Dioxide:       " + air_pollution_ratings.get("Sulphur Dioxide") + " " + colour_list.get("Sulphur Dioxide") +"\n\n" +
+            return new String[] {("Carbon Monoxide:   " + air_pollution_ratings.get("Carbon Monoxide") +"\n" +
+                            "Nitrogen Dioxide:     " + air_pollution_ratings.get("Nitrogen Dioxide") +"\n" +
+                            "Ozone:                        " + air_pollution_ratings.get("Ozone") + "\n" +
+                            "PM10 Particulate:    " + air_pollution_ratings.get("PM10 Particulate") + "\n" +
+                            "PM2.5 Particulate:   " + air_pollution_ratings.get("PM2.5 Particulate") + "\n" +
+                            "Sulphur Dioxide:       " + air_pollution_ratings.get("Sulphur Dioxide") + "\n\n" +
                             "Asthma Index:           " + asthma_index + " " + colour_list.get("Asthma Index") + "\n").toString(), asthma_index.toString()};
 
         } catch (MalformedURLException e) {

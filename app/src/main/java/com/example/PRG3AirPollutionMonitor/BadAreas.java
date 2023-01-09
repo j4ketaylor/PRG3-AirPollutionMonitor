@@ -76,7 +76,7 @@ public class BadAreas extends AppCompatActivity {
                         System.out.println(values.get(x));
                         try {
                             if (Integer.parseInt(y[1]) >= 2) {
-                                y[1] = "\uD83D\uDFE0";
+                                y[1] = "\uD83D\uDD34";
                                 values.put(x, y[1]);
                                 all_areas = all_areas + items[i] + "\n";
                                 all_numbers = all_numbers + values.get(x) + "\n";
@@ -91,7 +91,6 @@ public class BadAreas extends AppCompatActivity {
                             }
                         } catch (NumberFormatException n) {
                         }
-
 
                     }
                 } catch (Exception e) {

@@ -122,15 +122,11 @@ public class PrescriptionDetails extends AppCompatActivity {
                           Toast.makeText(PrescriptionDetails.this, getResources().getString(R.string.toast_error_expiry_date), Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 }
 
         });
         loadData();
         updateViews();
-
-
-
     }
 
     public void saveData() {
@@ -150,21 +146,16 @@ public class PrescriptionDetails extends AppCompatActivity {
         text3 = sharedPreferences.getString(TEXT3, "");
     }
 
-
     public void updateViews() {
 
         try {
-
             remaining_inhaler_uses_text.setText(text);
-
             prescription_expiry_date_text.setText(text2);
 
         } catch (Exception e) {
             System.out.println("Update View Error");
         }
-
     }
-
 
     @Override
     protected void onStop(){
