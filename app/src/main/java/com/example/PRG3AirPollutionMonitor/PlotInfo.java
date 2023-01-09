@@ -25,6 +25,7 @@ public class PlotInfo extends AppCompatActivity {
         });
 
         plot_description_text = (TextView) findViewById(R.id.plot_description);
-        plot_description_text.setText(" The graphs are plotted using data form report....");
+        plot_description_text.setText("The graphs are plotted using data from the London Air Quality Network Summary" +
+                " Reports between 2015 and 2020. Several areas are left out due to limited data avalibility in the interval.");
     }
 }
