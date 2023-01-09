@@ -104,10 +104,8 @@ public class MainMenu extends AppCompatActivity {
             date = LocalDate.now();
 
             load_prescription_detail();
-            prescription_uses--;
             update_prescription_use();
             prescription_use_notification();
-            prescription_expiry_notification();
             createNotificationChannel();
 
             //if timer is already running, show a popup indicating overdose and log overdose on calendar
@@ -276,8 +274,16 @@ public class MainMenu extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.putString("text", String.valueOf(this.prescription_uses));
-            editor.apply();
+            if (prescription_uses > 0) {
+                prescription_uses--;
+            }
+
+            else {
+                prescription_uses = 0;
+            }
+                editor.putString("text", String.valueOf(prescription_uses));
+                editor.apply();
+
         }
         catch (Exception e){
             Log.e( "Failed to update inhaler prescription", e.getMessage());
