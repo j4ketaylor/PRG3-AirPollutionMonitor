@@ -63,13 +63,14 @@ public class SortedAreas extends AppCompatActivity {
                         getAQI getInformation = new getAQI(x, data);
                         String[] y = getInformation.AQIOutput();
                         System.out.println(y[1]);
+                        String z = null;
                         if (Integer.parseInt(y[1]) == 0) {
                             y[1] = "No Info";
                         } else {
                             if (Integer.parseInt(y[1]) <= 1) {
                                 y[1] = "\uD83D\uDFE2";
                             } else {
-                                y[1] = "\uD83D\uDFE0";
+                                y[1] = "\uD83D\uDD34";
                             }
                         }
                         values.put(x, y[1]);

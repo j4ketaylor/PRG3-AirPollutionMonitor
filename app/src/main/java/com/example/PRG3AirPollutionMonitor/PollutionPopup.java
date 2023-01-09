@@ -58,7 +58,6 @@ public class PollutionPopup extends Activity {
                         if (Integer.parseInt(y[1]) == 0) {
                             y[1] = "No Info";
                         } else {
-
                             System.out.println("This happened");
                         }
 
