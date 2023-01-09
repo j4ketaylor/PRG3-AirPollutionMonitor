@@ -41,11 +41,12 @@ public class PollutionPopup extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*0.8),(int)(height*0.17));
+        getWindow().setLayout((int)(width*0.8),(int)(height*0.6));
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                all_areas2 = "Areas to avoid:" + "\n";
                 try  {
                     for (int i = 0; i < 33; i++) {
                         System.out.println(i);
