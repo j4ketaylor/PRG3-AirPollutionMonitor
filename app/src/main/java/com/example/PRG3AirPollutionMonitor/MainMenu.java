@@ -322,6 +322,8 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    //Build and customise the individual notifications
+
     public void inhaler_use_notify(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
         builder.setSmallIcon(R.drawable.ic_android_black_24dp);
@@ -373,6 +375,8 @@ public class MainMenu extends AppCompatActivity {
         managerCompat.notify(4,builder.build());
 
     }
+
+    //Constructs Notification channel where individual notifications are assigned
 
     public void createNotificationChannel(){
         NotificationChannel prescrip_channel = new NotificationChannel("Prescription Notification","Prescription Notification", NotificationManager.IMPORTANCE_DEFAULT);

@@ -33,6 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
         android:fontFamily="@font/roboto_bold"
         android:layout_marginTop="110dp" />
 
@@ -40,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="180dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Asthma Index Definition"
         android:textSize="20sp"
@@ -50,7 +52,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/asthmaindex"
-        android:layout_marginTop="210dp" />
+        android:layout_marginTop="240dp" />
 
     <TextView
         android:id="@+id/index_description1"
@@ -58,7 +60,9 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:fontFamily="@font/roboto_bold"
-        android:layout_marginTop="180dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="210dp"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -67,7 +71,19 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:fontFamily="@font/roboto_bold"
-        android:layout_marginTop="290dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="320dp"
         android:layout_marginLeft="10dp" />
 
+    <TextView
+        android:id="@+id/index_description3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_marginTop="640dp"
+        android:layout_marginLeft="10dp" />
 </RelativeLayout>
