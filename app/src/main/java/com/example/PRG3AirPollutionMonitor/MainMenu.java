@@ -127,25 +127,14 @@ public class MainMenu extends AppCompatActivity {
                 boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
             }
         });
-
+        Intent intent = new Intent(MainMenu.this, PollutionPopup.class);
+        startActivity(intent);
         load_prescription_detail();
         prescription_use_notification();
         prescription_expiry_notification();
         createNotificationChannel();
-
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            Intent intent = new Intent(MainMenu.this, PollutionPopup.class);
-            startActivity(intent);
-            return true;
-        } else {
-            return false;
-        }
-    }
     //starts the timer
     private void startTimer(){
 

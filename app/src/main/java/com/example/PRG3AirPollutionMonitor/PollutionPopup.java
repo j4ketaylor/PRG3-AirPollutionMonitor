@@ -41,7 +41,7 @@ public class PollutionPopup extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*0.8),(int)(height*0.6));
+        getWindow().setLayout((int)(width*0.7),(int)(height*0.5));
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -49,12 +49,10 @@ public class PollutionPopup extends Activity {
                 all_areas2 = "Areas to avoid:" + "\n";
                 try  {
                     for (int i = 0; i < 33; i++) {
-                        System.out.println(i);
                         x = items[i].toLowerCase().replaceAll("\\s+", "");
                         String data = "";
                         getAQI getInformation = new getAQI(x, data);
                         String[] y = getInformation.AQIOutput();
-                        System.out.println(y[1]);
                         if (Integer.parseInt(y[1]) == 0) {
                             y[1] = "No Info";
                         } else {
