@@ -21,6 +21,7 @@ public class EmergencyTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
         ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
 
+        // Check that emergency information page displayed correctly
         onView(withId(R.id.emergency_info_page)).check(matches(isDisplayed()));
     }
 
@@ -29,13 +30,9 @@ public class EmergencyTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
         ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
 
+        // Check that title and textviews displayed correctly
         onView(withId(R.id.emergency_information)).check(matches(isDisplayed()));
-
         onView(withId(R.id.whatToDo_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.AE_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.NHS111_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.urgentSymptoms_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.reference_text)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -43,23 +40,8 @@ public class EmergencyTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
         ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
 
+        // Check that cardviews displayed correctly
         onView(withId(R.id.whatToDo_cardview)).check(matches(isDisplayed()));
-//        onView(withId(R.id.call_999_cardview)).check(matches(isDisplayed()));
-//        onView(withId(R.id.call_111_cardview)).check(matches(isDisplayed()));
-//        onView(withId(R.id.urgentSymptoms_cardview)).check(matches(isDisplayed()));
-//        onView(withId(R.id.routine_cardview)).check(matches(isDisplayed()));
     }
-
-    //    @Test
-//    public void test_isTitleAndTextViewTextDisplayed() {
-//        Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),Emergency.class);
-//        ActivityScenario<Emergency> activityScenario = ActivityScenario.launch(intent);
-//
-//        onView(withId(R.id.welcome_title)).check(matches(withText(R.string.main_title)));
-//    }
-//
-//    @Test
-//    public void test_ifSourceLinksCanBeOpened() {
-//    }
 
 }

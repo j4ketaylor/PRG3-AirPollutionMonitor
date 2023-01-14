@@ -255,7 +255,4 @@ public class PrescriptionDetailsTest {
         assertNotEquals(savedDosageInterval,"0");
     }
 
-//    @Test
-//    public void test_invalidInput_decimalDosageInterval() {
-//    }
 }

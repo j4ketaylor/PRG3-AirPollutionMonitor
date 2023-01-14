@@ -47,6 +47,7 @@ public class AirQualityTest {
         onView(withId(R.id.recommended_places_to_live)).check(matches(withText(R.string.air_quality_plot_title)));
         onView(withId(R.id.news_updates)).check(matches(withText(R.string.news_updates_title)));
         onView(withId(R.id.list_of_areas)).check(matches(withText(R.string.sorted_areas_title)));
+        onView(withId(R.id.list_of_bad_areas)).check(matches(withText(R.string.areas_to_avoid_title)));
     }
 
     @Test

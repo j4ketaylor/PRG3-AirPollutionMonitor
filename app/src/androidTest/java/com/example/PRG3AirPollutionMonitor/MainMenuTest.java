@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 import android.content.Intent;
 
 import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -20,14 +21,15 @@ import org.junit.Rule;
 import org.junit.Test;
 
 public class MainMenuTest {
-//    @Rule
-//    public ActivityScenarioRule<MainMenu> activityScenarioRule = new ActivityScenarioRule<>(MainMenu.class);
-    
+
     @Test
     public void test_isMainMenuInView() {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+        // Check MainMenu is displayed
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
 
@@ -36,6 +38,10 @@ public class MainMenuTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+
+        // Check that title and all buttons on page is visible
         onView(withId(R.id.welcome_title)).check(matches(isDisplayed()));
         onView(withId(R.id.air_quality_button)).check(matches(isDisplayed()));
         onView(withId(R.id.emergency_button)).check(matches(isDisplayed()));
@@ -48,6 +54,10 @@ public class MainMenuTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+
+        // Check that text in title and buttons displayed correctly
         onView(withId(R.id.welcome_title)).check(matches(withText(R.string.main_title)));
         onView(withId(R.id.air_quality_button)).check(matches(withText(R.string.air_quality_title)));
         onView(withId(R.id.emergency_button)).check(matches(withText(R.string.emergency_title)));
@@ -60,9 +70,14 @@ public class MainMenuTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+
+        // Press on air quality button and check that it leads to correct page
         onView(withId(R.id.air_quality_button)).perform(click());
         onView(withId(R.id.air_quality_menu)).check(matches(isDisplayed()));
 
+        // Check that pressing back returns to Main Menu
         pressBack();
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
@@ -72,9 +87,14 @@ public class MainMenuTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+
+        // Press on emergency button and check that it leads to correct page
         onView(withId(R.id.emergency_button)).perform(click());
         onView(withId(R.id.emergency_info_page)).check(matches(isDisplayed()));
 
+        // Check that pressing back returns to Main Menu
         pressBack();
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }
@@ -84,9 +104,14 @@ public class MainMenuTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(),MainMenu.class);
         ActivityScenario<MainMenu> activityScenario = ActivityScenario.launch(intent);
 
+        // Press screen to dismiss pop-up
+        onView(withId(R.id.pollution_popup)).perform(ViewActions.pressBack());
+
+        // Press on inhaler use button and check that it leads to correct page
         onView(withId(R.id.inhaler_button)).perform(click());
         onView(withId(R.id.inhaler_use_menu)).check(matches(isDisplayed()));
 
+        // Check that pressing back returns to Main Menu
         pressBack();
         onView(withId(R.id.Main_Menu)).check(matches(isDisplayed()));
     }

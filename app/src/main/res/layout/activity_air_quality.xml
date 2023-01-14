@@ -67,7 +67,7 @@
         android:layout_marginTop="450dp"
         android:backgroundTint="@color/prussian_blue4"
         android:fontFamily="@font/roboto_bold"
-        android:text="All london Areas"
+        android:text="@string/sorted_areas_title"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -82,7 +82,7 @@
         android:layout_marginEnd="74dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/roboto_bold"
-        android:text="Areas to avoid"
+        android:text="@string/areas_to_avoid_title"
         android:textColor="@android:color/background_light"
         android:textSize="16sp"
         android:textStyle="bold" />

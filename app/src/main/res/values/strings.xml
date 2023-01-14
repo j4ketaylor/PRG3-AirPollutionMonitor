@@ -9,7 +9,8 @@
     <string name="live_air_pollution_title">Live Pollution Levels</string>
     <string name="air_quality_plot_title">Air Quality History</string>
     <string name="news_updates_title">News Updates</string>
-    <string name="sorted_areas_title">List of All London Areas</string>
+    <string name="sorted_areas_title">All London Areas</string>
+    <string name="areas_to_avoid_title">Areas To Avoid</string>
     <string name="check_calendar_title">Check Calendar</string>
     <string name="check_prescription_title">Check Prescription Details</string>
     <string name="location_live_viewer_title">Select a location: </string>
