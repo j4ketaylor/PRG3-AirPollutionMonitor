@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">letstryagain</string>
+    <string name="app_name">AirPollutionMonitor</string>
     <string name="select"></string>
     <string name="main_title">Welcome</string>
     <string name="air_quality_title">Air Quality</string>
