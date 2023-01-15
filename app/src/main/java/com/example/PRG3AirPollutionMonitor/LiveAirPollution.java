@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import java.util.Arrays;
 
+// This activity produces a list of every borough in London and the corresponding asthma index
 public class LiveAirPollution extends AppCompatActivity {
 
     TextView location_live_viewer;
@@ -60,8 +61,11 @@ public class LiveAirPollution extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
+
+                //Displays selected location at the bottom of the screen
                 Toast.makeText(getApplicationContext(),"Location: " +item,Toast.LENGTH_SHORT).show();
 
+                //Input of getAQI from String array of items
                 x = items[Arrays.asList(items).indexOf(item)].toLowerCase().replaceAll("\\s+","");
                 String data = "";
                 getAQI getInformation = new getAQI(x, data);
@@ -69,6 +73,7 @@ public class LiveAirPollution extends AppCompatActivity {
                 if (y[0] == "0") {
                     air_pollution_rating_viewer.setText("No information :(");
                 } else {
+                    //Gives the user information about all recorded particulates in the area from the output of getAQI
                     air_pollution_rating_viewer.setText(y[0]);
                 }
             }
