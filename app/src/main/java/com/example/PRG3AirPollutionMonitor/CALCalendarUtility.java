@@ -7,6 +7,8 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+// Utility class for the Calendar Activity, contains methods for structuring the array of dates to be displayed.
+
 public class CALCalendarUtility {
     public static LocalDate selectedDate;
 

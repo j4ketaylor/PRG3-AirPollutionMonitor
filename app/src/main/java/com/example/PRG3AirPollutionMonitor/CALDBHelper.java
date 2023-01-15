@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+// Database helper class for the Calendar Activity, contains methods for creating and accessing the database.
+
 public class CALDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "CALData.db";

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// View for the Calendar RecyclerView, which displays the dates in the month.
+
 public class CALCalendarView extends RecyclerView.ViewHolder  implements View.OnClickListener
 {
     private final ArrayList<LocalDate> days;

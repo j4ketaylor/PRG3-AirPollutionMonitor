@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.time.LocalTime;
 
+// Activity for creating and editing usage records.
+
 public class CALEditEvent extends AppCompatActivity {
 
     private EditText eventName;

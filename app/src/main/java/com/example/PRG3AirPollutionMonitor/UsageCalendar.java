@@ -15,6 +15,8 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Primary activity for the Calendar feature. Displays the calendar and digital clock.
+
 public class UsageCalendar extends AppCompatActivity implements CALCalendarAdapt.onItemClickListener
 {
     private TextView monthYearText;

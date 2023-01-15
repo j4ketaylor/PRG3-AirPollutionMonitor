@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+// Adapter for the Event RecyclerView, which displays the events in the selected date.
+
 public class CALEventAdapt extends ArrayAdapter<CALEvent>
 {
     public CALEventAdapt(@NonNull Context context, List<CALEvent> CALEvents)

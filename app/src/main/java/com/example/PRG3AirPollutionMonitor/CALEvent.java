@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+// Class for the Calendar Event, which contains the date, time, and description of the event.
+
 public class CALEvent
 {
     public static ArrayList<CALEvent> eventsList = new ArrayList<>();

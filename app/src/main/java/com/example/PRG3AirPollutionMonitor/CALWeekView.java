@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+// Secondary activity for the Calendar feature. Displays the calendar and the events for the selected date.
+
 public class CALWeekView extends AppCompatActivity implements CALCalendarAdapt.onItemClickListener
 {
     private TextView monthYearText;
