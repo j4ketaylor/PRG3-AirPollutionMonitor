@@ -35,7 +35,6 @@ public class MainMenu extends AppCompatActivity {
     Button countdown_button;
 
     //define variables needed for the countdown button
-
     public static long start_time_ms;
     private static long time_left_ms;
     private static long end_time;
@@ -74,26 +73,17 @@ public class MainMenu extends AppCompatActivity {
 
         // Add_button add clicklistener
         airQualityButton.setOnClickListener(v -> {
-            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-            // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, AirQuality.class);
-            // start the activity connect to the specified class
             startActivity(intent);
         });
 
         emergencyButton.setOnClickListener(v -> {
-            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-            // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, Emergency.class);
-            // start the activity connect to the specified class
             startActivity(intent);
         });
 
         inhalerButton.setOnClickListener(v -> {
-            // Intents are objects of the android.content.Intent type. Your code can send them to the Android system defining
-            // the components you are targeting. Intent to start an activity called SecondActivity with the following code.
             Intent intent = new Intent(MainMenu.this, InhalerMenu.class);
-            // start the activity connect to the specified class
             startActivity(intent);
         });
         context = this;
@@ -107,8 +97,6 @@ public class MainMenu extends AppCompatActivity {
             update_prescription_use();
             prescription_use_notification();
             createNotificationChannel();
-
-            //if timer is already running, show a popup indicating overdose and log overdose on calendar
             if (timer_running){
                 Intent intent = new Intent(MainMenu.this,OverdosePopup.class);
                 startActivity(intent);
@@ -117,7 +105,6 @@ public class MainMenu extends AppCompatActivity {
                 CALEvent.eventsList.add(newCALEvent);
                 boolean DataInserted = XCALDBHelper.insertData(eventName, date, time);
             }
-            //starts the timer if it is not currently running, and logs the usage on calendar
             else{
                 time_left_ms = start_time_ms;
                 startTimer();
@@ -134,58 +121,39 @@ public class MainMenu extends AppCompatActivity {
         prescription_expiry_notification();
         createNotificationChannel();
     }
-
+    /*Reference 1 - parts of code taken from https://gist.github.com/codinginflow/61e9cec706e7fe94b0ca3fffc0253bf2 */
     //starts the timer
     private void startTimer(){
-
-        //Prescription dosage interval already loaded
-            //load_prescription_dosage_interval();
-
-        //finds end time based on time left and current time of system, used to be saved to find time left after stopping the app
         end_time = System.currentTimeMillis() + time_left_ms;
-        //initializes the timer
         CountDownTimer timer = new CountDownTimer(time_left_ms, 1000) {
             @Override
-            //updates text of timer per tick
             public void onTick(long l) {
                 time_left_ms = l;
                 updatetext();
             }
 
             @Override
-            //resets timer when it ends
             public void onFinish() {
                 resetTimer();
             }
-            //starts the countdown
         }.start();
-        //shows app that the timer is currently running
         timer_running = true;
     }
     //resets the timer
     private void resetTimer(){
-
-        //Prescription dosage interval already loaded
-            //load_prescription_dosage_interval();
-
-        //shows app that the timer is not running
         timer_running = false;
-        //resets text on timer
         countdown_button.setText("log inhaler use");
-        //resets time of timer
         time_left_ms = start_time_ms;
 
     }
     //updates text on timer according to the time left
     private void updatetext(){
-        //calculates time left in minutes and seconds
         int minutes = (int) time_left_ms/1000/60;
         int seconds = (int) time_left_ms/1000%60;
-        //formats time for display
         String time_left_formatted = String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
-        //sets text on timer to time left
         countdown_button.setText(time_left_formatted);
     }
+    //saves information of timer
     public static void saveVar(Context context){
         SharedPreferences pref = context.getSharedPreferences("pref",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -198,7 +166,6 @@ public class MainMenu extends AppCompatActivity {
     //saves information of the timer when the app is stopped
     protected void onStop(){
         super.onStop();
-        //adds variables to a shared preference
         saveVar(this);
 
     }
@@ -207,47 +174,39 @@ public class MainMenu extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        //loads information of the timer before it was stopped when the app is started
         SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
 
-        //defaults timer as not running
         timer_running = pref.getBoolean("running",false);
 
-        //loads the start time
         load_prescription_dosage_interval();
 
-        //if the timer was running when the app was stopped, loads the end time and finds the current time left
         if(timer_running){
             end_time = pref.getLong("end_time",0);
-            //finds time left by subtracting current time of the system from saved end time
             time_left_ms = end_time - System.currentTimeMillis();
-            //resets the timer if the app was stopped for longer than the time left before being stopped
             if(time_left_ms<0){
                 resetTimer();
             }
-            //starts the timer again otherwise
             else{
                 startTimer();
             }
         }
     }
+    /* end of reference 1 */
 
+    //loads the prescription dosage interval from the database
     public void load_prescription_dosage_interval(){
-        //loads the prescription dosage interval from the database
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs",MODE_PRIVATE);
             double dosage_interval = Double.parseDouble(sharedPreferences.getString("text3", ""));
-
-            //converts dosage interval from minutes to milliseconds
             start_time_ms = (long) (dosage_interval * 60000);
 
         } catch(Exception e) {
             Log.e( "Failed to load dosage interval", e.getMessage());
-            //use default dosage interval
             start_time_ms = 6000;
         }
     }
 
+    //loads prescription details from database
     public void load_prescription_detail(){
         try{
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
@@ -258,6 +217,7 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    //updates prescription uses
     public void update_prescription_use(){
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
@@ -279,9 +239,8 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    //Check if inhaler is used up and notify user
     public void prescription_use_notification(){
-
-        //Check if inhaler is used up and notify user
         try {
             Toast.makeText(MainMenu.this, "Remaining inhaler uses: " + prescription_uses, Toast.LENGTH_SHORT).show();
             if (prescription_uses <= 10 && prescription_uses > 0) {
@@ -295,9 +254,8 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    //Check if inhaler is expired and notify user
     public void prescription_expiry_notification(){
-
-        //Check if inhaler is expired and notify user
             try {
             expiryDate = LocalDate.parse(prescription_expiry_date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             Toast.makeText(MainMenu.this, "Inhaler Expiry Date: " + expiryDate, Toast.LENGTH_SHORT).show();
@@ -312,7 +270,6 @@ public class MainMenu extends AppCompatActivity {
     }
 
     //Build and customise the individual notifications
-
     public void inhaler_use_notify(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainMenu.this,"Prescription Notification");
         builder.setSmallIcon(R.drawable.ic_android_black_24dp);
